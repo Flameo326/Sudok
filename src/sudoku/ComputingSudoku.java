@@ -14,7 +14,7 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
     ArrayList values;
     Map<Integer, ArrayList> map;
     
-    public ComputingSudoku(int difficulty) throws InterruptedException{
+    public ComputingSudoku(int difficulty){
         values = new ArrayList();
         SudokuBoxes = new int[9][9];
         BoxesWithValue = new boolean[9][9];
@@ -60,7 +60,7 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
         return false;
     }
     
-    public void MakeAnswerKey() throws InterruptedException{        
+    public void MakeAnswerKey() {        
         for(int i = 0; i < 9; i++){
             for(int y = 0; y < 9; y++){
                 SudokuBoxes[i][y] = 0;
@@ -88,7 +88,7 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
                 
     }
     
-    public void SetSquare() throws InterruptedException{
+    public void SetSquare(){
         int row = rand.nextInt(9), column = rand.nextInt(9);       
                
         do{

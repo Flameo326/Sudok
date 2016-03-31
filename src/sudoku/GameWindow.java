@@ -8,7 +8,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 
 public class GameWindow extends javax.swing.JFrame{
-    
+    public static GameWindow singleton = null;
     boolean[][] BoxesWithValue = new boolean[9][9]; //These tell which values are to be shown
     int[][] SudokuBoxes; 
     String[] integers ={ "1", "2", "3", "4", "5", "6", "7", "8", "9"}; // Toggle for Sudoku boxes
@@ -1405,7 +1405,7 @@ public class GameWindow extends javax.swing.JFrame{
     }
     //Actions to preform when called from HelpMenu
     public void Example(){
-        String[][] description = {new String[]{"Here we have a possible", "Sudoku Puzzle. It is 9 by 9",
+        final String[][] description = {new String[]{"Here we have a possible", "Sudoku Puzzle. It is 9 by 9",
                 "with 9 boxes, rows and", "columns."}, new String[]{"In the first box we have", "values of 1, 2, 3, 4, and 5.",
                  "This means that those", "values can not appear in", "the 1st box again."}, new String[]{"Additionally, "
                 + "1, 2, and 3", "can not appear in the first", "row and 1, 4, and 5 can not", "appear in the"
@@ -1415,7 +1415,7 @@ public class GameWindow extends javax.swing.JFrame{
         ComputerButton.setVisible(false);
         AnswerButton.setVisible(false);    //Simplify view for newbie
         StepButton.setVisible(true);
-        int[] i = {0};        
+        final int[] i = {0};        
         StepButton.addMouseListener(new java.awt.event.MouseAdapter() { // Allow person to click through steps
             public void mouseClicked(java.awt.event.MouseEvent evt) {               
                 Explain(description, i);
