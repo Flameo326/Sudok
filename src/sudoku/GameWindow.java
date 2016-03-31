@@ -120,7 +120,6 @@ public class GameWindow extends javax.swing.JFrame{
         jList1 = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setLocation(new java.awt.Point(340, 235));
         setMinimumSize(new java.awt.Dimension(300, 450));
         setPreferredSize(new java.awt.Dimension(465, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -177,30 +176,46 @@ public class GameWindow extends javax.swing.JFrame{
 
         FourOneLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FourOneLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FourOneLabel.setText("0");
         FourOneLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FourOneLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FourOneLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FourOneLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FourOneLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 30, 30));
 
         FiveOneLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FiveOneLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FiveOneLabel.setText("0");
         FiveOneLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FiveOneLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FiveOneLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FiveOneLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FiveOneLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 30, 30));
 
         SixOneLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         SixOneLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SixOneLabel.setText("0");
         SixOneLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SixOneLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        SixOneLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SixOneLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(SixOneLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 30, 30));
 
         SevenOneLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         SevenOneLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SevenOneLabel.setText("0");
         SevenOneLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SevenOneLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        SevenOneLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SevenOneLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(SevenOneLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 30, 30));
 
         EightOneLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -289,23 +304,35 @@ public class GameWindow extends javax.swing.JFrame{
 
         SixNineLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         SixNineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SixNineLabel.setText("0");
         SixNineLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SixNineLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        SixNineLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SixNineLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(SixNineLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 30, 30));
 
         FiveNineLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FiveNineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FiveNineLabel.setText("0");
         FiveNineLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FiveNineLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FiveNineLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FiveNineLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FiveNineLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 30, 30));
 
         FourNineLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FourNineLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FourNineLabel.setText("0");
         FourNineLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FourNineLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FourNineLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FourNineLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FourNineLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 30, 30));
 
         ThreeNineLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -441,23 +468,35 @@ public class GameWindow extends javax.swing.JFrame{
 
         FourEightLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FourEightLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FourEightLabel.setText("0");
         FourEightLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FourEightLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FourEightLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FourEightLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FourEightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 30, 30));
 
         FiveEightLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FiveEightLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FiveEightLabel.setText("0");
         FiveEightLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FiveEightLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FiveEightLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FiveEightLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FiveEightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 30, 30));
 
         SixEightLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         SixEightLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SixEightLabel.setText("0");
         SixEightLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SixEightLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        SixEightLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SixEightLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(SixEightLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 30, 30));
 
         SevenEightLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -518,16 +557,24 @@ public class GameWindow extends javax.swing.JFrame{
 
         SevenTwoLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         SevenTwoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SevenTwoLabel.setText("0");
         SevenTwoLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SevenTwoLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        SevenTwoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SevenTwoLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(SevenTwoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 30, 30));
 
         SevenThreeLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         SevenThreeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SevenThreeLabel.setText("0");
         SevenThreeLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SevenThreeLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        SevenThreeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SevenThreeLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(SevenThreeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 30, 30));
 
         SevenFourLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -535,6 +582,11 @@ public class GameWindow extends javax.swing.JFrame{
         SevenFourLabel.setText("0");
         SevenFourLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SevenFourLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        SevenFourLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SevenFourLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(SevenFourLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 30, 30));
 
         SevenFiveLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -560,128 +612,200 @@ public class GameWindow extends javax.swing.JFrame{
 
         SixSevenLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         SixSevenLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SixSevenLabel.setText("0");
         SixSevenLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SixSevenLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        SixSevenLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SixSevenLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(SixSevenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 30, 30));
 
         SixSixLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         SixSixLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SixSixLabel.setText("0");
         SixSixLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SixSixLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        SixSixLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SixSixLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(SixSixLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 30, 30));
 
         SixFiveLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         SixFiveLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SixFiveLabel.setText("0");
         SixFiveLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SixFiveLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        SixFiveLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SixFiveLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(SixFiveLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 30, 30));
 
         SixFourLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         SixFourLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SixFourLabel.setText("0");
         SixFourLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SixFourLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        SixFourLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SixFourLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(SixFourLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 30, 30));
 
         SixThreeLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         SixThreeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SixThreeLabel.setText("0");
         SixThreeLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SixThreeLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        SixThreeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SixThreeLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(SixThreeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 30, 30));
 
         SixTwoLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         SixTwoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SixTwoLabel.setText("0");
         SixTwoLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SixTwoLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        SixTwoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SixTwoLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(SixTwoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 30, 30));
 
         FiveTwoLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FiveTwoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FiveTwoLabel.setText("0");
         FiveTwoLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FiveTwoLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FiveTwoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FiveTwoLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FiveTwoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 30, 30));
 
         FiveThreeLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FiveThreeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FiveThreeLabel.setText("0");
         FiveThreeLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FiveThreeLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FiveThreeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FiveThreeLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FiveThreeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 30, 30));
 
         FiveFourLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FiveFourLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FiveFourLabel.setText("0");
         FiveFourLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FiveFourLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FiveFourLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FiveFourLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FiveFourLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 30, 30));
 
         FiveFiveLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FiveFiveLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FiveFiveLabel.setText("0");
         FiveFiveLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FiveFiveLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FiveFiveLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FiveFiveLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FiveFiveLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 30, 30));
 
         FiveSixLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FiveSixLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FiveSixLabel.setText("0");
         FiveSixLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FiveSixLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FiveSixLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FiveSixLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FiveSixLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 30, 30));
 
         FiveSevenLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FiveSevenLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FiveSevenLabel.setText("0");
         FiveSevenLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FiveSevenLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FiveSevenLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FiveSevenLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FiveSevenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 30, 30));
 
         FourSevenLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FourSevenLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FourSevenLabel.setText("0");
         FourSevenLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FourSevenLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FourSevenLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FourSevenLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FourSevenLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 30, 30));
 
         FourSixLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FourSixLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FourSixLabel.setText("0");
         FourSixLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FourSixLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FourSixLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FourSixLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FourSixLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 30, 30));
 
         FourFiveLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FourFiveLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FourFiveLabel.setText("0");
         FourFiveLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FourFiveLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FourFiveLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FourFiveLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FourFiveLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 30, 30));
 
         FourFourLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FourFourLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FourFourLabel.setText("0");
         FourFourLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FourFourLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FourFourLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FourFourLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FourFourLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 30, 30));
 
         FourThreeLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FourThreeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FourThreeLabel.setText("0");
         FourThreeLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FourThreeLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FourThreeLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FourThreeLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FourThreeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 30, 30));
 
         FourTwoLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         FourTwoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        FourTwoLabel.setText("0");
         FourTwoLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         FourTwoLabel.setPreferredSize(new java.awt.Dimension(50, 50));
+        FourTwoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FourTwoLabelMouseClicked(evt);
+            }
+        });
         getContentPane().add(FourTwoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 30, 30));
 
         ThreeTwoLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -1303,6 +1427,564 @@ public class GameWindow extends javax.swing.JFrame{
             }
         }
     }//GEN-LAST:event_ThreeNineLabelMouseClicked
+
+    private void FourOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourOneLabelMouseClicked
+         if(!BoxesWithValue[3][0]){
+            int x;
+            if("".equals(FourOneLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FourOneLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FourOneLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FourOneLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FourOneLabelMouseClicked
+
+    private void FourTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourTwoLabelMouseClicked
+        if(!BoxesWithValue[3][1]){
+            int x;
+            if("".equals(FourTwoLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FourTwoLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FourTwoLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FourTwoLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FourTwoLabelMouseClicked
+
+    private void FourThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourThreeLabelMouseClicked
+        if(!BoxesWithValue[3][2]){
+            int x;
+            if("".equals(FourThreeLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FourThreeLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FourThreeLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FourThreeLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FourThreeLabelMouseClicked
+
+    private void FourFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourFourLabelMouseClicked
+        if(!BoxesWithValue[3][3]){
+            int x;
+            if("".equals(FourFourLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FourFourLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FourFourLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FourFourLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FourFourLabelMouseClicked
+
+    private void FourFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourFiveLabelMouseClicked
+        if(!BoxesWithValue[3][4]){
+            int x;
+            if("".equals(FourFiveLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FourFiveLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FourFiveLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FourFiveLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FourFiveLabelMouseClicked
+
+    private void FourSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourSixLabelMouseClicked
+        if(!BoxesWithValue[3][5]){
+            int x;
+            if("".equals(FourSixLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FourSixLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FourSixLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FourSixLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FourSixLabelMouseClicked
+
+    private void FourSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourSevenLabelMouseClicked
+        if(!BoxesWithValue[3][6]){
+            int x;
+            if("".equals(FourSevenLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FourSevenLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FourSevenLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FourSevenLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FourSevenLabelMouseClicked
+
+    private void FourEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourEightLabelMouseClicked
+        if(!BoxesWithValue[3][7]){
+            int x;
+            if("".equals(FourEightLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FourEightLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FourEightLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FourEightLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FourEightLabelMouseClicked
+
+    private void FourNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourNineLabelMouseClicked
+        if(!BoxesWithValue[3][8]){
+            int x;
+            if("".equals(FourNineLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FourNineLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FourNineLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FourNineLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FourNineLabelMouseClicked
+
+    private void FiveOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveOneLabelMouseClicked
+        if(!BoxesWithValue[4][0]){
+            int x;
+            if("".equals(FiveOneLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FiveOneLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FiveOneLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FiveOneLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FiveOneLabelMouseClicked
+
+    private void FiveTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveTwoLabelMouseClicked
+        if(!BoxesWithValue[4][1]){
+            int x;
+            if("".equals(FiveTwoLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FiveTwoLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FiveTwoLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FiveTwoLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FiveTwoLabelMouseClicked
+
+    private void FiveThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveThreeLabelMouseClicked
+        if(!BoxesWithValue[4][2]){
+            int x;
+            if("".equals(FiveThreeLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FiveThreeLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FiveThreeLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FiveThreeLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FiveThreeLabelMouseClicked
+
+    private void FiveFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveFourLabelMouseClicked
+        if(!BoxesWithValue[4][3]){
+            int x;
+            if("".equals(FiveFourLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FiveFourLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FiveFourLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FiveFourLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FiveFourLabelMouseClicked
+
+    private void FiveFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveFiveLabelMouseClicked
+        if(!BoxesWithValue[4][4]){
+            int x;
+            if("".equals(FiveFiveLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FiveFiveLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FiveFiveLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FiveFiveLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FiveFiveLabelMouseClicked
+
+    private void FiveSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveSixLabelMouseClicked
+        if(!BoxesWithValue[4][5]){
+            int x;
+            if("".equals(FiveSixLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FiveSixLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FiveSixLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FiveSixLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FiveSixLabelMouseClicked
+
+    private void FiveSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveSevenLabelMouseClicked
+        if(!BoxesWithValue[4][6]){
+            int x;
+            if("".equals(FiveSevenLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FiveSevenLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FiveSevenLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FiveSevenLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FiveSevenLabelMouseClicked
+
+    private void FiveEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveEightLabelMouseClicked
+        if(!BoxesWithValue[4][7]){
+            int x;
+            if("".equals(FiveEightLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FiveEightLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FiveEightLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FiveEightLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FiveEightLabelMouseClicked
+
+    private void FiveNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveNineLabelMouseClicked
+        if(!BoxesWithValue[4][8]){
+            int x;
+            if("".equals(FiveNineLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(FiveNineLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                FiveNineLabel.setText(integers[x]);
+            else{
+                x = 0;
+                FiveNineLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_FiveNineLabelMouseClicked
+
+    private void SixOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixOneLabelMouseClicked
+        if(!BoxesWithValue[5][0]){
+            int x;
+            if("".equals(SixOneLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(SixOneLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                SixOneLabel.setText(integers[x]);
+            else{
+                x = 0;
+                SixOneLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_SixOneLabelMouseClicked
+
+    private void SixTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixTwoLabelMouseClicked
+        if(!BoxesWithValue[5][1]){
+            int x;
+            if("".equals(SixTwoLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(SixTwoLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                SixTwoLabel.setText(integers[x]);
+            else{
+                x = 0;
+                SixTwoLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_SixTwoLabelMouseClicked
+
+    private void SixThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixThreeLabelMouseClicked
+        if(!BoxesWithValue[5][2]){
+            int x;
+            if("".equals(SixThreeLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(SixThreeLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                SixThreeLabel.setText(integers[x]);
+            else{
+                x = 0;
+                SixThreeLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_SixThreeLabelMouseClicked
+
+    private void SixFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixFourLabelMouseClicked
+        if(!BoxesWithValue[5][3]){
+            int x;
+            if("".equals(SixFourLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(SixFourLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                SixFourLabel.setText(integers[x]);
+            else{
+                x = 0;
+                SixFourLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_SixFourLabelMouseClicked
+
+    private void SixFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixFiveLabelMouseClicked
+        if(!BoxesWithValue[5][4]){
+            int x;
+            if("".equals(SixFiveLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(SixFiveLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                SixFiveLabel.setText(integers[x]);
+            else{
+                x = 0;
+                SixFiveLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_SixFiveLabelMouseClicked
+
+    private void SixSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixSixLabelMouseClicked
+        if(!BoxesWithValue[5][5]){
+            int x;
+            if("".equals(SixSixLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(SixSixLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                SixSixLabel.setText(integers[x]);
+            else{
+                x = 0;
+                SixSixLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_SixSixLabelMouseClicked
+
+    private void SixSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixSevenLabelMouseClicked
+        if(!BoxesWithValue[5][6]){
+            int x;
+            if("".equals(SixSevenLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(SixSevenLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                SixSevenLabel.setText(integers[x]);
+            else{
+                x = 0;
+                SixSevenLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_SixSevenLabelMouseClicked
+
+    private void SixEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixEightLabelMouseClicked
+        if(!BoxesWithValue[5][7]){
+            int x;
+            if("".equals(SixEightLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(SixEightLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                SixEightLabel.setText(integers[x]);
+            else{
+                x = 0;
+                SixEightLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_SixEightLabelMouseClicked
+
+    private void SixNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixNineLabelMouseClicked
+        if(!BoxesWithValue[5][8]){
+            int x;
+            if("".equals(SixNineLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(SixNineLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                SixNineLabel.setText(integers[x]);
+            else{
+                x = 0;
+                SixNineLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_SixNineLabelMouseClicked
+
+    private void SevenOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenOneLabelMouseClicked
+        if(!BoxesWithValue[6][0]){
+            int x;
+            if("".equals(SevenOneLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(SevenOneLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                SevenOneLabel.setText(integers[x]);
+            else{
+                x = 0;
+                SevenOneLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_SevenOneLabelMouseClicked
+
+    private void SevenTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenTwoLabelMouseClicked
+        if(!BoxesWithValue[6][1]){
+            int x;
+            if("".equals(SevenTwoLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(SevenTwoLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                SevenTwoLabel.setText(integers[x]);
+            else{
+                x = 0;
+                SevenTwoLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_SevenTwoLabelMouseClicked
+
+    private void SevenThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenThreeLabelMouseClicked
+        if(!BoxesWithValue[6][2]){
+            int x;
+            if("".equals(SevenThreeLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(SevenThreeLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                SevenThreeLabel.setText(integers[x]);
+            else{
+                x = 0;
+                SevenThreeLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_SevenThreeLabelMouseClicked
+
+    private void SevenFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenFourLabelMouseClicked
+        if(!BoxesWithValue[6][3]){
+            int x;
+            if("".equals(SevenFourLabel.getText())) {
+                x = 0;
+            } else {
+                x = Integer.valueOf(SevenFourLabel.getText());
+            }
+            
+            if(x>=1 && x<9)
+                SevenFourLabel.setText(integers[x]);
+            else{
+                x = 0;
+                SevenFourLabel.setText(integers[x]);
+            }
+        }
+    }//GEN-LAST:event_SevenFourLabelMouseClicked
 
     private void Map() { //Mapping
         Map<String, JLabel> ArrayToLabel = new HashMap<>();
