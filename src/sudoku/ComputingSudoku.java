@@ -3,7 +3,6 @@ package sudoku;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Random;
 
@@ -15,7 +14,7 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
     ArrayList values;
     Map<Integer, ArrayList> map;
     
-    public ComputingSudoku(int difficulty){
+    public ComputingSudoku(int difficulty) throws InterruptedException{
         values = new ArrayList();
         SudokuBoxes = new int[9][9];
         BoxesWithValue = new boolean[9][9];
@@ -61,7 +60,7 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
         return false;
     }
     
-    public void MakeAnswerKey(){        
+    public void MakeAnswerKey() throws InterruptedException{        
         for(int i = 0; i < 9; i++){
             for(int y = 0; y < 9; y++){
                 SudokuBoxes[i][y] = 0;
@@ -80,13 +79,16 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
            }
            System.out.println();
            System.out.println();
-       } while(checkAnswerKey());
+       } while(checkAnswerKey() && GameWindow.singleton == null);
         
-        GameWindow gmWin = new GameWindow(SudokuBoxes, BoxesWithValue);
-        gmWin.setVisible(true);        
+        if(GameWindow.singleton == null) {
+            GameWindow.singleton = new GameWindow(SudokuBoxes, BoxesWithValue);
+            GameWindow.singleton.setVisible(true);
+        }
+                
     }
     
-    public void SetSquare(){
+    public void SetSquare() throws InterruptedException{
         int row = rand.nextInt(9), column = rand.nextInt(9);       
                
         do{
@@ -104,11 +106,14 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
         }while(true);
         ArrayList temp = map.get((row*9) + column);        
         
-        int value = 0;        
+        int value = 0;
+        if(!(GameWindow.singleton == null))
+            return;
         if(!(temp.isEmpty()))
             value = (int)temp.get(rand.nextInt(temp.size()));
-        else
-            MakeAnswerKey();
+        else 
+            MakeAnswerKey();        
+        
         System.out.println(row + " " + column + " " + value);
         SudokuBoxes[row][column] = value;        
         
