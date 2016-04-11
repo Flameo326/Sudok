@@ -70,22 +70,14 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
             map.put(i, (ArrayList)values.clone());    
        
         do{
-           SetSquare();           
-           for(int e = 0; e < 9; e++){
-               for(int y = 0; y < 9; y++){
-                   System.out.print(SudokuBoxes[e][y] + " ");
-               }
-               System.out.println();
-           }
-           System.out.println();
-           System.out.println();
+           SetSquare();                                
        } while(checkAnswerKey() && GameWindow.singleton == null);
         
         if(GameWindow.singleton == null) {
             GameWindow.singleton = new GameWindow(SudokuBoxes, BoxesWithValue);
             GameWindow.singleton.setVisible(true);
         }
-                
+          
     }
     
     public void SetSquare(){
@@ -101,8 +93,7 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
                        row = 0;
                }
            } else
-               break;
-           System.out.println("p");
+               break;           
         }while(true);
         ArrayList temp = map.get((row*9) + column);        
         
@@ -114,7 +105,6 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
         else 
             MakeAnswerKey();        
         
-        System.out.println(row + " " + column + " " + value);
         SudokuBoxes[row][column] = value;        
         
         removeFromLists(row, column, value);  
@@ -125,33 +115,7 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
     public void CheckValues( int row, int column){        
         checkRow(row);
         checkColumn(column);
-        checkBox(row, column);
-        
-        /*
-        for(int i = 0; i < 9; i++){
-            if(SudokuBoxes[row][i] == 0){
-                if(i != column)
-                    checkColumn(i);
-                checkBox(row, (i/3) *3);
-            } 
-        }
-        for(int i = 0; i < 9; i++){
-            if(SudokuBoxes[i][column] == 0){
-                if(i != row)
-                    checkRow(i);
-                checkBox((i/3) *3, column);
-            }
-        }
-        
-        int _row = row/3 *3, _column = column/3 *3;
-        for(int i = _row; i < _row + 3; i++){
-            for(int y = _column; y < _column + 3; y++){
-                if(i != row)
-                    checkRow(i);
-                if(y != column)
-                    checkColumn(y);
-            }           
-        } */                       
+        checkBox(row, column);                       
     } 
     
     public void checkRow(int row){
