@@ -105,8 +105,7 @@ public class HelpWindow extends javax.swing.JFrame {
         gmWin.Example();    //Call function to trigger Explanation in Sudoku
     }//GEN-LAST:event_ExampleButtonMouseClicked
    
-    private BufferedImage ReSize(ImageIcon imgIcon, int height, int width){
-        
+    private BufferedImage ReSize(ImageIcon imgIcon, int height, int width){        
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = (Graphics2D) bi.createGraphics();
         g.drawImage(imgIcon.getImage(), 0, 0, width, height, this);       

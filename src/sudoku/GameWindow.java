@@ -8,21 +8,24 @@ import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 
 public class GameWindow extends javax.swing.JFrame{
-    public static GameWindow singleton = null;
+    public static GameWindow singleton = null;   // For a single instance
+    
     boolean[][] BoxesWithValue = new boolean[9][9]; //These tell which values are to be shown
-    int[][] SudokuBoxes; 
-    String[] integers ={ "1", "2", "3", "4", "5", "6", "7", "8", "9"}; // Toggle for Sudoku boxes
-    DefaultListModel explanation;
-    Map<String, JLabel> ArrayToLabel;
+    int[][] SudokuBoxes, playerChoice; //Answer Key and Players answers
+    boolean SudokuBoxesmodel = true, correct = true;
+    
+    String[] integers ={ "1", "2", "3", "4", "5", "6", "7", "8", "9"}; // List for toggling of boxes
+    DefaultListModel explanation;     // Descripton of events going on
+    Map<String, JLabel> ArrayToLabel; // map fr connections of string to labels
     
     public GameWindow(int[][] SudokuBoxes, boolean[][] BoxesWithValue) {
         explanation = new DefaultListModel();
         ArrayToLabel = new HashMap<>();
-        
-        setContentPane(new Paint());
+                                            // May need to Adjust??????
+        setContentPane(new Paint());     //Create a valid looking Sudoku Puzzle
         initComponents();
         jList1.setModel(explanation);  //Set up side for Explanations
-        jList1.setVisibleRowCount(21);
+        jList1.setVisibleRowCount(21);  // For explanation of help menu
         
         for(int e = 0; e < 9; e++){
                for(int y = 0; y < 9; y++){
@@ -33,8 +36,10 @@ public class GameWindow extends javax.swing.JFrame{
         
         StepButton.setVisible(false);
         this.SudokuBoxes = SudokuBoxes; //AnswerSheet
-        this.BoxesWithValue = BoxesWithValue;
-        Map(); //Create connections to numbers to Jlabels
+        playerChoice = new int[9][9];   // Player choices for Answers
+        this.BoxesWithValue = BoxesWithValue; // Shown Boxes
+        
+        Map(); //Create connections of Strings to Jlabels
     }
 
     @SuppressWarnings("unchecked")
@@ -1044,7 +1049,8 @@ public class GameWindow extends javax.swing.JFrame{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+        
+// This will allow the Labels to toggle between numbers if It hasnt been assigned a number (81 Labels)
     private void OneOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneOneLabelMouseClicked
         if(!BoxesWithValue[0][0]){
             int x;
@@ -1052,8 +1058,8 @@ public class GameWindow extends javax.swing.JFrame{
                 x = 0;
             } else {
                 x = Integer.valueOf(OneOneLabel.getText());
-            }
-            // This will allow the Label to toggle between numbers if It hasnt been assigned a number
+            } 
+            
             if(x>=1 && x<9)
                 OneOneLabel.setText(integers[x]);
             else{
@@ -2504,15 +2510,48 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_NineNineLabelMouseClicked
 
     private void AnswerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnswerButtonMouseClicked
-        int[][] playerChoice = new int[9][9];
         for(int i = 0; i < 9; i++){
             for(int y = 0; y < 9; y++){
                playerChoice[i][y] =  Integer.parseInt(ArrayToLabel.get(Integer.toString(i*9 + (y+1))).getText());
+               if(SudokuBoxes[i][y] != playerChoice[i][y])
+                   SudokuBoxesmodel = false;
+               compare(i, y, playerChoice[i][y]);
             }
         }
+        CheckAnswer();
     }//GEN-LAST:event_AnswerButtonMouseClicked
 
-    private void compare(){
+    private void compare(int row, int column, int value){
+        for(int i = 0; i < 9; i++){
+            if(i != column && playerChoice[row][i] == value)
+                correct = false;
+        }
+        for(int i = 0; i < 9; i++){
+            if(i != row && playerChoice[i][column] == value)
+                correct = false;
+        }
+        
+        int _row = row/3, _column = column/3;
+        for(int i = _row; i < _row+3; i++){
+            for(int y = _column; y < _column+3; y++){
+                if(i != row && y != column && playerChoice[i][y] == value)
+                    correct = false;
+            }            
+        }      
+    }
+    
+    private void CheckAnswer(){
+        if(SudokuBoxesmodel)
+            explanation.addElement("That is the correct answer! Good Job!");
+        else if(correct)
+            explanation.addElement("This isn't the pattern the machine came up with but it works! Good Job!");
+        else{
+            explanation.addElement("Aww, Too bad. That isn't the correct answer. Try again!");
+            
+        }
+    }
+    
+    private void ChangeToWrong(int key){
         
     }
     
@@ -2609,14 +2648,14 @@ public class GameWindow extends javax.swing.JFrame{
                         ArrayToLabel.get(String.valueOf((i*9) + (y+1))).setText(String.valueOf(SudokuBoxes[i][y]));                         
                     } catch(NullPointerException n){
                         System.out.println("NO");
-                    }
-                   
+                    }                   
                 }
             }
         }
     }
     //Actions to preform when called from HelpMenu
     public void Example(){
+        //List of the explanation
         final String[][] description = {new String[]{"Here we have a possible", "Sudoku Puzzle. It is 9 by 9",
                 "with 9 boxes, rows and", "columns."}, new String[]{"In the first box we have", "values of 1, 2, 3, 4, and 5.",
                  "This means that those", "values can not appear in", "the 1st box again."}, new String[]{"Additionally, "

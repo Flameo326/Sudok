@@ -1,9 +1,6 @@
 
 package sudoku;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class StartingWindow extends javax.swing.JFrame {
     String[] difficulty = new String[4];
     int i = 0; // class variable for difficulty button
@@ -86,10 +83,8 @@ public class StartingWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_HelpButtonMouseClicked
 
     private void PlayButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayButtonMouseClicked
-       
-            //Call ComputingSudoku to create Sudoku Puzzle
-        ComputingSudoku cmpSudoku = new ComputingSudoku(i);
-        
+         //Call ComputingSudoku to create Sudoku Puzzle
+        ComputingSudoku cmpSudoku = new ComputingSudoku(i);        
         dispose();
     }//GEN-LAST:event_PlayButtonMouseClicked
 
