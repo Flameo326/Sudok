@@ -1,6 +1,7 @@
 
 package sudoku;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,16 +27,12 @@ public class GameWindow extends javax.swing.JFrame{
         initComponents();
         jList1.setModel(explanation);  //Set up side for Explanations
         jList1.setVisibleRowCount(21);  // For explanation of help menu
-        
-        for(int e = 0; e < 9; e++){
-               for(int y = 0; y < 9; y++){
-                   System.out.print(SudokuBoxes[e][y] + " ");
-               }
-               System.out.println();
-           }
-        
+                
         StepButton.setVisible(false);
         this.SudokuBoxes = SudokuBoxes; //AnswerSheet
+        
+        
+        
         playerChoice = new int[9][9];   // Player choices for Answers
         this.BoxesWithValue = BoxesWithValue; // Shown Boxes
         
@@ -2510,32 +2507,67 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_NineNineLabelMouseClicked
 
     private void AnswerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnswerButtonMouseClicked
+        for(int e = 0; e < 9; e++){
+               for(int y = 0; y < 9; y++){
+                   System.out.print(SudokuBoxes[e][y] + " ");
+               }
+               System.out.println();
+           }
+        System.out.println();
+        
+        
+        if(AnswerButton.getText().equals("Compare Solution")){
         for(int i = 0; i < 9; i++){
             for(int y = 0; y < 9; y++){
-               playerChoice[i][y] =  Integer.parseInt(ArrayToLabel.get(Integer.toString(i*9 + (y+1))).getText());
-               if(SudokuBoxes[i][y] != playerChoice[i][y])
-                   SudokuBoxesmodel = false;
-               compare(i, y, playerChoice[i][y]);
+                //if(!(ArrayToLabel.get(Integer.toString(i*9 + (y+1))).getText().equals(""))){
+                    //playerChoice[i][y] =  Integer.valueOf(ArrayToLabel.get(Integer.toString(i*9 + (y+1))).getText());
+                    //if(SudokuBoxes[i][y] != playerChoice[i][y])
+                        //SudokuBoxesmodel = false;
+                    //compare(i, y, playerChoice[i][y]);
+                //} else
+                    //correct = false;
+                ArrayToLabel.get(Integer.toString(i*9 + (y+1))).setText(Integer.toString(SudokuBoxes[i][y]));
+                System.out.print(SudokuBoxes[i][y] + " ");
             }
+            System.out.println();
         }
         CheckAnswer();
+        AnswerButton.setText("Continue?");
+        } else{
+            explanation.clear();
+            for(int i = 0; i < 9; i++){
+                for(int y = 0; y < 9; y++){
+                    ArrayToLabel.get(Integer.toString(i*9 + y + 1)).setForeground(new Color(0,0,0));
+                }
+            }
+            AnswerButton.setText("Compare Solution");
+        }            
     }//GEN-LAST:event_AnswerButtonMouseClicked
 
     private void compare(int row, int column, int value){
         for(int i = 0; i < 9; i++){
-            if(i != column && playerChoice[row][i] == value)
+            if(i != column && playerChoice[row][i] == value){
                 correct = false;
+                ChangeToWrong(row*9 + column+1);
+                ChangeToWrong(row*9 + i+1);
+            }
         }
         for(int i = 0; i < 9; i++){
-            if(i != row && playerChoice[i][column] == value)
+            if(i != row && playerChoice[i][column] == value){
                 correct = false;
+                ChangeToWrong(row*9 + column+1);
+                ChangeToWrong(i*9 + column+1);
+            }
         }
         
-        int _row = row/3, _column = column/3;
+        int _row = (row/3) *3, _column = (column/3) *3;
         for(int i = _row; i < _row+3; i++){
             for(int y = _column; y < _column+3; y++){
-                if(i != row && y != column && playerChoice[i][y] == value)
+                if(i != row && y != column && playerChoice[i][y] == value){
                     correct = false;
+                    ChangeToWrong(row*9 + column+1);                    
+                    ChangeToWrong(i*9 + y+1);                    
+                }
             }            
         }      
     }
@@ -2543,19 +2575,30 @@ public class GameWindow extends javax.swing.JFrame{
     private void CheckAnswer(){
         if(SudokuBoxesmodel)
             explanation.addElement("That is the correct answer! Good Job!");
-        else if(correct)
-            explanation.addElement("This isn't the pattern the machine came up with but it works! Good Job!");
-        else{
-            explanation.addElement("Aww, Too bad. That isn't the correct answer. Try again!");
-            
+        else if(correct){
+            explanation.addElement("This isn't the pattern the"); 
+            explanation.addElement("machine came up with but"); 
+            explanation.addElement("it works! Good Job!");                        
         }
+        else{
+            explanation.addElement("Aww, Too bad. That isn't"); 
+            explanation.addElement("the correct answer. Try"); 
+            explanation.addElement("again!");            
+        }       
     }
     
     private void ChangeToWrong(int key){
-        
+        ArrayToLabel.get(Integer.toString(key)).setForeground(new Color(255, 0, 0));       
     }
     
     private void Map() { //Mapping
+        for(int e = 0; e < 9; e++){
+               for(int y = 0; y < 9; y++){
+                   System.out.print(SudokuBoxes[e][y] + " ");
+               }
+               System.out.println();
+           }
+        System.out.println();
         
         ArrayToLabel.put("1", OneOneLabel);
         ArrayToLabel.put("2", OneTwoLabel);
@@ -2644,14 +2687,21 @@ public class GameWindow extends javax.swing.JFrame{
                 if(BoxesWithValue[i][y]){ // Assign Decided values their respective numbers
                     try{
                         Font Bolden = new Font("Tahoma", Font.BOLD, 36);
-                        ArrayToLabel.get(String.valueOf((i*9) + (y+1))).setFont(Bolden);
-                        ArrayToLabel.get(String.valueOf((i*9) + (y+1))).setText(String.valueOf(SudokuBoxes[i][y]));                         
+                        ArrayToLabel.get(Integer.toString((i*9) + (y+1))).setFont(Bolden);
+                        ArrayToLabel.get(Integer.toString((i*9) + (y+1))).setText(Integer.toString(SudokuBoxes[i][y]));                         
                     } catch(NullPointerException n){
                         System.out.println("NO");
                     }                   
                 }
             }
         }
+        for(int e = 0; e < 9; e++){
+               for(int y = 0; y < 9; y++){
+                   System.out.print(SudokuBoxes[e][y] + " ");
+               }
+               System.out.println();
+           }
+        System.out.println();
     }
     //Actions to preform when called from HelpMenu
     public void Example(){

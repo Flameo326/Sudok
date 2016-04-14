@@ -27,8 +27,6 @@ public class StartingWindow extends javax.swing.JFrame {
         PlayButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocation(new java.awt.Point(590, 285));
-        setPreferredSize(new java.awt.Dimension(200, 150));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
