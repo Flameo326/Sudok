@@ -1,43 +1,37 @@
-
 package sudoku;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.HashMap;
 import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 
-public class GameWindow extends javax.swing.JFrame{
+public class GameWindow extends javax.swing.JFrame {
     public static GameWindow singleton = null;   // For a single instance
+    final static String[] integers = {"1", "2", "3", "4", "5", "6", "7", "8", "9"}; // List for toggling of boxes
     
-    boolean[][] BoxesWithValue = new boolean[9][9]; //These tell which values are to be shown
-    int[][] SudokuBoxes, playerChoice; //Answer Key and Players answers
-    boolean SudokuBoxesmodel = true, correct = true;
+    int[][] playerChoice; //Answer Key and Players answers
+    boolean correct = true;
     
-    String[] integers ={ "1", "2", "3", "4", "5", "6", "7", "8", "9"}; // List for toggling of boxes
     DefaultListModel explanation;     // Descripton of events going on
     Map<String, JLabel> ArrayToLabel; // map fr connections of string to labels
-    
+
     public GameWindow(int[][] SudokuBoxes, boolean[][] BoxesWithValue) {
-        explanation = new DefaultListModel();
-        ArrayToLabel = new HashMap<>();
-                                            // May need to Adjust??????
+        explanation = new DefaultListModel();        
+        
+        // May need to Adjust??????
         setContentPane(new Paint());     //Create a valid looking Sudoku Puzzle
         initComponents();
         jList1.setModel(explanation);  //Set up side for Explanations
         jList1.setVisibleRowCount(21);  // For explanation of help menu
-                
-        StepButton.setVisible(false);
-        this.SudokuBoxes = SudokuBoxes; //AnswerSheet
-        
-        
-        
-        playerChoice = new int[9][9];   // Player choices for Answers
-        this.BoxesWithValue = BoxesWithValue; // Shown Boxes
-        
-        Map(); //Create connections of Strings to Jlabels
+
+        StepButton.setVisible(false);        
+
+        playerChoice = new int[9][9];       
     }
+    
+    // Could i make a public blok class wiht answer key similar to map.
+    //Have this class grab the label and set position of label. 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -521,6 +515,7 @@ public class GameWindow extends javax.swing.JFrame{
         ThreeEightLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         ThreeEightLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ThreeEightLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        ThreeEightLabel.setName(""); // NOI18N
         ThreeEightLabel.setPreferredSize(new java.awt.Dimension(50, 50));
         ThreeEightLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1046,39 +1041,38 @@ public class GameWindow extends javax.swing.JFrame{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-        
+
 // This will allow the Labels to toggle between numbers if It hasnt been assigned a number (81 Labels)
     private void OneOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneOneLabelMouseClicked
-        if(!BoxesWithValue[0][0]){
+        if (!BoxesWithValue[0][0]) {
             int x;
-            if("".equals(OneOneLabel.getText())) {
+            if ("".equals(OneOneLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(OneOneLabel.getText());
-            } 
-            
-            if(x>=1 && x<9)
+            }
+
+            if (x >= 1 && x < 9) {
                 OneOneLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 OneOneLabel.setText(integers[x]);
             }
         }
-        
     }//GEN-LAST:event_OneOneLabelMouseClicked
 
     private void OneTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneTwoLabelMouseClicked
-       if(!BoxesWithValue[0][1]){
+        if (!BoxesWithValue[0][1]) {
             int x;
-            if("".equals(OneTwoLabel.getText())) {
+            if ("".equals(OneTwoLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(OneTwoLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 OneTwoLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 OneTwoLabel.setText(integers[x]);
             }
@@ -1086,17 +1080,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_OneTwoLabelMouseClicked
 
     private void OneThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneThreeLabelMouseClicked
-        if(!BoxesWithValue[0][2]){
+        if (!BoxesWithValue[0][2]) {
             int x;
-            if("".equals(OneThreeLabel.getText())) {
+            if ("".equals(OneThreeLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(OneThreeLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 OneThreeLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 OneThreeLabel.setText(integers[x]);
             }
@@ -1104,17 +1098,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_OneThreeLabelMouseClicked
 
     private void OneFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneFourLabelMouseClicked
-        if(!BoxesWithValue[0][3]){
+        if (!BoxesWithValue[0][3]) {
             int x;
-            if("".equals(OneFourLabel.getText())) {
+            if ("".equals(OneFourLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(OneFourLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 OneFourLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 OneFourLabel.setText(integers[x]);
             }
@@ -1122,17 +1116,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_OneFourLabelMouseClicked
 
     private void OneFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneFiveLabelMouseClicked
-        if(!BoxesWithValue[0][4]){
+        if (!BoxesWithValue[0][4]) {
             int x;
-            if("".equals(OneFiveLabel.getText())) {
+            if ("".equals(OneFiveLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(OneFiveLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 OneFiveLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 OneFiveLabel.setText(integers[x]);
             }
@@ -1140,17 +1134,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_OneFiveLabelMouseClicked
 
     private void OneSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneSixLabelMouseClicked
-        if(!BoxesWithValue[0][5]){
+        if (!BoxesWithValue[0][5]) {
             int x;
-            if("".equals(OneSixLabel.getText())) {
+            if ("".equals(OneSixLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(OneSixLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 OneSixLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 OneSixLabel.setText(integers[x]);
             }
@@ -1158,17 +1152,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_OneSixLabelMouseClicked
 
     private void OneSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneSevenLabelMouseClicked
-        if(!BoxesWithValue[0][6]){
+        if (!BoxesWithValue[0][6]) {
             int x;
-            if("".equals(OneSevenLabel.getText())) {
+            if ("".equals(OneSevenLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(OneSevenLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 OneSevenLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 OneSevenLabel.setText(integers[x]);
             }
@@ -1176,17 +1170,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_OneSevenLabelMouseClicked
 
     private void OneEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneEightLabelMouseClicked
-        if(!BoxesWithValue[0][7]){
+        if (!BoxesWithValue[0][7]) {
             int x;
-            if("".equals(OneEightLabel.getText())) {
+            if ("".equals(OneEightLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(OneEightLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 OneEightLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 OneEightLabel.setText(integers[x]);
             }
@@ -1194,17 +1188,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_OneEightLabelMouseClicked
 
     private void OneNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneNineLabelMouseClicked
-        if(!BoxesWithValue[0][8]){
+        if (!BoxesWithValue[0][8]) {
             int x;
-            if("".equals(OneNineLabel.getText())) {
+            if ("".equals(OneNineLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(OneNineLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 OneNineLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 OneNineLabel.setText(integers[x]);
             }
@@ -1212,17 +1206,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_OneNineLabelMouseClicked
 
     private void TwoOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoOneLabelMouseClicked
-        if(!BoxesWithValue[1][0]){
+        if (!BoxesWithValue[1][0]) {
             int x;
-            if("".equals(TwoOneLabel.getText())) {
+            if ("".equals(TwoOneLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(TwoOneLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 TwoOneLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 TwoOneLabel.setText(integers[x]);
             }
@@ -1230,17 +1224,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_TwoOneLabelMouseClicked
 
     private void TwoTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoTwoLabelMouseClicked
-        if(!BoxesWithValue[1][1]){
+        if (!BoxesWithValue[1][1]) {
             int x;
-            if("".equals(TwoTwoLabel.getText())) {
+            if ("".equals(TwoTwoLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(TwoTwoLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 TwoTwoLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 TwoTwoLabel.setText(integers[x]);
             }
@@ -1248,17 +1242,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_TwoTwoLabelMouseClicked
 
     private void ThreeOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeOneLabelMouseClicked
-        if(!BoxesWithValue[2][0]){
+        if (!BoxesWithValue[2][0]) {
             int x;
-            if("".equals(ThreeOneLabel.getText())) {
+            if ("".equals(ThreeOneLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(ThreeOneLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 ThreeOneLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 ThreeOneLabel.setText(integers[x]);
             }
@@ -1266,17 +1260,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_ThreeOneLabelMouseClicked
 
     private void TwoThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoThreeLabelMouseClicked
-        if(!BoxesWithValue[1][2]){
+        if (!BoxesWithValue[1][2]) {
             int x;
-            if("".equals(TwoThreeLabel.getText())) {
+            if ("".equals(TwoThreeLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(TwoThreeLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 TwoThreeLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 TwoThreeLabel.setText(integers[x]);
             }
@@ -1284,17 +1278,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_TwoThreeLabelMouseClicked
 
     private void TwoFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoFourLabelMouseClicked
-        if(!BoxesWithValue[1][3]){
+        if (!BoxesWithValue[1][3]) {
             int x;
-            if("".equals(TwoFourLabel.getText())) {
+            if ("".equals(TwoFourLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(TwoFourLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 TwoFourLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 TwoFourLabel.setText(integers[x]);
             }
@@ -1302,17 +1296,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_TwoFourLabelMouseClicked
 
     private void TwoFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoFiveLabelMouseClicked
-        if(!BoxesWithValue[1][4]){
+        if (!BoxesWithValue[1][4]) {
             int x;
-            if("".equals(TwoFiveLabel.getText())) {
+            if ("".equals(TwoFiveLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(TwoFiveLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 TwoFiveLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 TwoFiveLabel.setText(integers[x]);
             }
@@ -1320,17 +1314,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_TwoFiveLabelMouseClicked
 
     private void TwoSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoSixLabelMouseClicked
-        if(!BoxesWithValue[1][5]){
+        if (!BoxesWithValue[1][5]) {
             int x;
-            if("".equals(TwoSixLabel.getText())) {
+            if ("".equals(TwoSixLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(TwoSixLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 TwoSixLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 TwoSixLabel.setText(integers[x]);
             }
@@ -1338,17 +1332,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_TwoSixLabelMouseClicked
 
     private void TwoSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoSevenLabelMouseClicked
-        if(!BoxesWithValue[1][6]){
+        if (!BoxesWithValue[1][6]) {
             int x;
-            if("".equals(TwoSevenLabel.getText())) {
+            if ("".equals(TwoSevenLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(TwoSevenLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 TwoSevenLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 TwoSevenLabel.setText(integers[x]);
             }
@@ -1356,17 +1350,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_TwoSevenLabelMouseClicked
 
     private void TwoEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoEightLabelMouseClicked
-        if(!BoxesWithValue[1][7]){
+        if (!BoxesWithValue[1][7]) {
             int x;
-            if("".equals(TwoEightLabel.getText())) {
+            if ("".equals(TwoEightLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(TwoEightLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 TwoEightLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 TwoEightLabel.setText(integers[x]);
             }
@@ -1374,17 +1368,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_TwoEightLabelMouseClicked
 
     private void TwoNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoNineLabelMouseClicked
-        if(!BoxesWithValue[1][8]){
+        if (!BoxesWithValue[1][8]) {
             int x;
-            if("".equals(TwoNineLabel.getText())) {
+            if ("".equals(TwoNineLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(TwoNineLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 TwoNineLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 TwoNineLabel.setText(integers[x]);
             }
@@ -1392,17 +1386,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_TwoNineLabelMouseClicked
 
     private void ThreeTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeTwoLabelMouseClicked
-        if(!BoxesWithValue[2][1]){
+        if (!BoxesWithValue[2][1]) {
             int x;
-            if("".equals(ThreeTwoLabel.getText())) {
+            if ("".equals(ThreeTwoLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(ThreeTwoLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 ThreeTwoLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 ThreeTwoLabel.setText(integers[x]);
             }
@@ -1410,17 +1404,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_ThreeTwoLabelMouseClicked
 
     private void ThreeThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeThreeLabelMouseClicked
-        if(!BoxesWithValue[2][2]){
+        if (!BoxesWithValue[2][2]) {
             int x;
-            if("".equals(ThreeThreeLabel.getText())) {
+            if ("".equals(ThreeThreeLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(ThreeThreeLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 ThreeThreeLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 ThreeThreeLabel.setText(integers[x]);
             }
@@ -1428,17 +1422,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_ThreeThreeLabelMouseClicked
 
     private void ThreeFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeFourLabelMouseClicked
-        if(!BoxesWithValue[2][3]){
+        if (!BoxesWithValue[2][3]) {
             int x;
-            if("".equals(ThreeFourLabel.getText())) {
+            if ("".equals(ThreeFourLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(ThreeFourLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 ThreeFourLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 ThreeFourLabel.setText(integers[x]);
             }
@@ -1446,17 +1440,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_ThreeFourLabelMouseClicked
 
     private void ThreeFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeFiveLabelMouseClicked
-        if(!BoxesWithValue[2][4]){
+        if (!BoxesWithValue[2][4]) {
             int x;
-            if("".equals(ThreeFiveLabel.getText())) {
+            if ("".equals(ThreeFiveLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(ThreeFiveLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 ThreeFiveLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 ThreeFiveLabel.setText(integers[x]);
             }
@@ -1464,17 +1458,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_ThreeFiveLabelMouseClicked
 
     private void ThreeSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeSixLabelMouseClicked
-        if(!BoxesWithValue[2][5]){
+        if (!BoxesWithValue[2][5]) {
             int x;
-            if("".equals(ThreeSixLabel.getText())) {
+            if ("".equals(ThreeSixLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(ThreeSixLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 ThreeSixLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 ThreeSixLabel.setText(integers[x]);
             }
@@ -1482,17 +1476,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_ThreeSixLabelMouseClicked
 
     private void ThreeSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeSevenLabelMouseClicked
-        if(!BoxesWithValue[2][6]){
+        if (!BoxesWithValue[2][6]) {
             int x;
-            if("".equals(ThreeSevenLabel.getText())) {
+            if ("".equals(ThreeSevenLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(ThreeSevenLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 ThreeSevenLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 ThreeSevenLabel.setText(integers[x]);
             }
@@ -1500,17 +1494,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_ThreeSevenLabelMouseClicked
 
     private void ThreeEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeEightLabelMouseClicked
-        if(!BoxesWithValue[2][7]){
+        if (!BoxesWithValue[2][7]) {
             int x;
-            if("".equals(ThreeEightLabel.getText())) {
+            if ("".equals(ThreeEightLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(ThreeEightLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 ThreeEightLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 ThreeEightLabel.setText(integers[x]);
             }
@@ -1518,17 +1512,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_ThreeEightLabelMouseClicked
 
     private void ThreeNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeNineLabelMouseClicked
-        if(!BoxesWithValue[2][8]){
+        if (!BoxesWithValue[2][8]) {
             int x;
-            if("".equals(ThreeNineLabel.getText())) {
+            if ("".equals(ThreeNineLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(ThreeNineLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 ThreeNineLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 ThreeNineLabel.setText(integers[x]);
             }
@@ -1536,17 +1530,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_ThreeNineLabelMouseClicked
 
     private void FourOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourOneLabelMouseClicked
-         if(!BoxesWithValue[3][0]){
+        if (!BoxesWithValue[3][0]) {
             int x;
-            if("".equals(FourOneLabel.getText())) {
+            if ("".equals(FourOneLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FourOneLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FourOneLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FourOneLabel.setText(integers[x]);
             }
@@ -1554,17 +1548,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FourOneLabelMouseClicked
 
     private void FourTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourTwoLabelMouseClicked
-        if(!BoxesWithValue[3][1]){
+        if (!BoxesWithValue[3][1]) {
             int x;
-            if("".equals(FourTwoLabel.getText())) {
+            if ("".equals(FourTwoLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FourTwoLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FourTwoLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FourTwoLabel.setText(integers[x]);
             }
@@ -1572,17 +1566,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FourTwoLabelMouseClicked
 
     private void FourThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourThreeLabelMouseClicked
-        if(!BoxesWithValue[3][2]){
+        if (!BoxesWithValue[3][2]) {
             int x;
-            if("".equals(FourThreeLabel.getText())) {
+            if ("".equals(FourThreeLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FourThreeLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FourThreeLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FourThreeLabel.setText(integers[x]);
             }
@@ -1590,17 +1584,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FourThreeLabelMouseClicked
 
     private void FourFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourFourLabelMouseClicked
-        if(!BoxesWithValue[3][3]){
+        if (!BoxesWithValue[3][3]) {
             int x;
-            if("".equals(FourFourLabel.getText())) {
+            if ("".equals(FourFourLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FourFourLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FourFourLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FourFourLabel.setText(integers[x]);
             }
@@ -1608,17 +1602,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FourFourLabelMouseClicked
 
     private void FourFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourFiveLabelMouseClicked
-        if(!BoxesWithValue[3][4]){
+        if (!BoxesWithValue[3][4]) {
             int x;
-            if("".equals(FourFiveLabel.getText())) {
+            if ("".equals(FourFiveLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FourFiveLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FourFiveLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FourFiveLabel.setText(integers[x]);
             }
@@ -1626,17 +1620,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FourFiveLabelMouseClicked
 
     private void FourSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourSixLabelMouseClicked
-        if(!BoxesWithValue[3][5]){
+        if (!BoxesWithValue[3][5]) {
             int x;
-            if("".equals(FourSixLabel.getText())) {
+            if ("".equals(FourSixLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FourSixLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FourSixLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FourSixLabel.setText(integers[x]);
             }
@@ -1644,17 +1638,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FourSixLabelMouseClicked
 
     private void FourSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourSevenLabelMouseClicked
-        if(!BoxesWithValue[3][6]){
+        if (!BoxesWithValue[3][6]) {
             int x;
-            if("".equals(FourSevenLabel.getText())) {
+            if ("".equals(FourSevenLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FourSevenLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FourSevenLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FourSevenLabel.setText(integers[x]);
             }
@@ -1662,17 +1656,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FourSevenLabelMouseClicked
 
     private void FourEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourEightLabelMouseClicked
-        if(!BoxesWithValue[3][7]){
+        if (!BoxesWithValue[3][7]) {
             int x;
-            if("".equals(FourEightLabel.getText())) {
+            if ("".equals(FourEightLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FourEightLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FourEightLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FourEightLabel.setText(integers[x]);
             }
@@ -1680,17 +1674,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FourEightLabelMouseClicked
 
     private void FourNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourNineLabelMouseClicked
-        if(!BoxesWithValue[3][8]){
+        if (!BoxesWithValue[3][8]) {
             int x;
-            if("".equals(FourNineLabel.getText())) {
+            if ("".equals(FourNineLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FourNineLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FourNineLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FourNineLabel.setText(integers[x]);
             }
@@ -1698,17 +1692,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FourNineLabelMouseClicked
 
     private void FiveOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveOneLabelMouseClicked
-        if(!BoxesWithValue[4][0]){
+        if (!BoxesWithValue[4][0]) {
             int x;
-            if("".equals(FiveOneLabel.getText())) {
+            if ("".equals(FiveOneLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FiveOneLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FiveOneLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FiveOneLabel.setText(integers[x]);
             }
@@ -1716,17 +1710,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FiveOneLabelMouseClicked
 
     private void FiveTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveTwoLabelMouseClicked
-        if(!BoxesWithValue[4][1]){
+        if (!BoxesWithValue[4][1]) {
             int x;
-            if("".equals(FiveTwoLabel.getText())) {
+            if ("".equals(FiveTwoLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FiveTwoLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FiveTwoLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FiveTwoLabel.setText(integers[x]);
             }
@@ -1734,17 +1728,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FiveTwoLabelMouseClicked
 
     private void FiveThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveThreeLabelMouseClicked
-        if(!BoxesWithValue[4][2]){
+        if (!BoxesWithValue[4][2]) {
             int x;
-            if("".equals(FiveThreeLabel.getText())) {
+            if ("".equals(FiveThreeLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FiveThreeLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FiveThreeLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FiveThreeLabel.setText(integers[x]);
             }
@@ -1752,17 +1746,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FiveThreeLabelMouseClicked
 
     private void FiveFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveFourLabelMouseClicked
-        if(!BoxesWithValue[4][3]){
+        if (!BoxesWithValue[4][3]) {
             int x;
-            if("".equals(FiveFourLabel.getText())) {
+            if ("".equals(FiveFourLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FiveFourLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FiveFourLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FiveFourLabel.setText(integers[x]);
             }
@@ -1770,17 +1764,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FiveFourLabelMouseClicked
 
     private void FiveFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveFiveLabelMouseClicked
-        if(!BoxesWithValue[4][4]){
+        if (!BoxesWithValue[4][4]) {
             int x;
-            if("".equals(FiveFiveLabel.getText())) {
+            if ("".equals(FiveFiveLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FiveFiveLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FiveFiveLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FiveFiveLabel.setText(integers[x]);
             }
@@ -1788,17 +1782,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FiveFiveLabelMouseClicked
 
     private void FiveSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveSixLabelMouseClicked
-        if(!BoxesWithValue[4][5]){
+        if (!BoxesWithValue[4][5]) {
             int x;
-            if("".equals(FiveSixLabel.getText())) {
+            if ("".equals(FiveSixLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FiveSixLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FiveSixLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FiveSixLabel.setText(integers[x]);
             }
@@ -1806,17 +1800,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FiveSixLabelMouseClicked
 
     private void FiveSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveSevenLabelMouseClicked
-        if(!BoxesWithValue[4][6]){
+        if (!BoxesWithValue[4][6]) {
             int x;
-            if("".equals(FiveSevenLabel.getText())) {
+            if ("".equals(FiveSevenLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FiveSevenLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FiveSevenLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FiveSevenLabel.setText(integers[x]);
             }
@@ -1824,17 +1818,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FiveSevenLabelMouseClicked
 
     private void FiveEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveEightLabelMouseClicked
-        if(!BoxesWithValue[4][7]){
+        if (!BoxesWithValue[4][7]) {
             int x;
-            if("".equals(FiveEightLabel.getText())) {
+            if ("".equals(FiveEightLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FiveEightLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FiveEightLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FiveEightLabel.setText(integers[x]);
             }
@@ -1842,17 +1836,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FiveEightLabelMouseClicked
 
     private void FiveNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveNineLabelMouseClicked
-        if(!BoxesWithValue[4][8]){
+        if (!BoxesWithValue[4][8]) {
             int x;
-            if("".equals(FiveNineLabel.getText())) {
+            if ("".equals(FiveNineLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(FiveNineLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 FiveNineLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 FiveNineLabel.setText(integers[x]);
             }
@@ -1860,17 +1854,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_FiveNineLabelMouseClicked
 
     private void SixOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixOneLabelMouseClicked
-        if(!BoxesWithValue[5][0]){
+        if (!BoxesWithValue[5][0]) {
             int x;
-            if("".equals(SixOneLabel.getText())) {
+            if ("".equals(SixOneLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SixOneLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SixOneLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SixOneLabel.setText(integers[x]);
             }
@@ -1878,17 +1872,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SixOneLabelMouseClicked
 
     private void SixTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixTwoLabelMouseClicked
-        if(!BoxesWithValue[5][1]){
+        if (!BoxesWithValue[5][1]) {
             int x;
-            if("".equals(SixTwoLabel.getText())) {
+            if ("".equals(SixTwoLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SixTwoLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SixTwoLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SixTwoLabel.setText(integers[x]);
             }
@@ -1896,17 +1890,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SixTwoLabelMouseClicked
 
     private void SixThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixThreeLabelMouseClicked
-        if(!BoxesWithValue[5][2]){
+        if (!BoxesWithValue[5][2]) {
             int x;
-            if("".equals(SixThreeLabel.getText())) {
+            if ("".equals(SixThreeLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SixThreeLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SixThreeLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SixThreeLabel.setText(integers[x]);
             }
@@ -1914,17 +1908,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SixThreeLabelMouseClicked
 
     private void SixFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixFourLabelMouseClicked
-        if(!BoxesWithValue[5][3]){
+        if (!BoxesWithValue[5][3]) {
             int x;
-            if("".equals(SixFourLabel.getText())) {
+            if ("".equals(SixFourLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SixFourLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SixFourLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SixFourLabel.setText(integers[x]);
             }
@@ -1932,17 +1926,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SixFourLabelMouseClicked
 
     private void SixFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixFiveLabelMouseClicked
-        if(!BoxesWithValue[5][4]){
+        if (!BoxesWithValue[5][4]) {
             int x;
-            if("".equals(SixFiveLabel.getText())) {
+            if ("".equals(SixFiveLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SixFiveLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SixFiveLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SixFiveLabel.setText(integers[x]);
             }
@@ -1950,17 +1944,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SixFiveLabelMouseClicked
 
     private void SixSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixSixLabelMouseClicked
-        if(!BoxesWithValue[5][5]){
+        if (!BoxesWithValue[5][5]) {
             int x;
-            if("".equals(SixSixLabel.getText())) {
+            if ("".equals(SixSixLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SixSixLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SixSixLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SixSixLabel.setText(integers[x]);
             }
@@ -1968,17 +1962,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SixSixLabelMouseClicked
 
     private void SixSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixSevenLabelMouseClicked
-        if(!BoxesWithValue[5][6]){
+        if (!BoxesWithValue[5][6]) {
             int x;
-            if("".equals(SixSevenLabel.getText())) {
+            if ("".equals(SixSevenLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SixSevenLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SixSevenLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SixSevenLabel.setText(integers[x]);
             }
@@ -1986,17 +1980,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SixSevenLabelMouseClicked
 
     private void SixEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixEightLabelMouseClicked
-        if(!BoxesWithValue[5][7]){
+        if (!BoxesWithValue[5][7]) {
             int x;
-            if("".equals(SixEightLabel.getText())) {
+            if ("".equals(SixEightLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SixEightLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SixEightLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SixEightLabel.setText(integers[x]);
             }
@@ -2004,17 +1998,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SixEightLabelMouseClicked
 
     private void SixNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixNineLabelMouseClicked
-        if(!BoxesWithValue[5][8]){
+        if (!BoxesWithValue[5][8]) {
             int x;
-            if("".equals(SixNineLabel.getText())) {
+            if ("".equals(SixNineLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SixNineLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SixNineLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SixNineLabel.setText(integers[x]);
             }
@@ -2022,17 +2016,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SixNineLabelMouseClicked
 
     private void SevenOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenOneLabelMouseClicked
-        if(!BoxesWithValue[6][0]){
+        if (!BoxesWithValue[6][0]) {
             int x;
-            if("".equals(SevenOneLabel.getText())) {
+            if ("".equals(SevenOneLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SevenOneLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SevenOneLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SevenOneLabel.setText(integers[x]);
             }
@@ -2040,17 +2034,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SevenOneLabelMouseClicked
 
     private void SevenTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenTwoLabelMouseClicked
-        if(!BoxesWithValue[6][1]){
+        if (!BoxesWithValue[6][1]) {
             int x;
-            if("".equals(SevenTwoLabel.getText())) {
+            if ("".equals(SevenTwoLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SevenTwoLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SevenTwoLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SevenTwoLabel.setText(integers[x]);
             }
@@ -2058,17 +2052,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SevenTwoLabelMouseClicked
 
     private void SevenThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenThreeLabelMouseClicked
-        if(!BoxesWithValue[6][2]){
+        if (!BoxesWithValue[6][2]) {
             int x;
-            if("".equals(SevenThreeLabel.getText())) {
+            if ("".equals(SevenThreeLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SevenThreeLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SevenThreeLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SevenThreeLabel.setText(integers[x]);
             }
@@ -2076,17 +2070,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SevenThreeLabelMouseClicked
 
     private void SevenFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenFourLabelMouseClicked
-        if(!BoxesWithValue[6][3]){
+        if (!BoxesWithValue[6][3]) {
             int x;
-            if("".equals(SevenFourLabel.getText())) {
+            if ("".equals(SevenFourLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SevenFourLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SevenFourLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SevenFourLabel.setText(integers[x]);
             }
@@ -2094,34 +2088,34 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SevenFourLabelMouseClicked
 
     private void SevenFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenFiveLabelMouseClicked
-        if(!BoxesWithValue[6][4]){
+        if (!BoxesWithValue[6][4]) {
             int x;
-            if("".equals(SevenFiveLabel.getText())) {
+            if ("".equals(SevenFiveLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SevenFiveLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SevenFiveLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SevenFiveLabel.setText(integers[x]);
             }
         }    }//GEN-LAST:event_SevenFiveLabelMouseClicked
 
     private void SevenSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenSixLabelMouseClicked
-        if(!BoxesWithValue[6][5]){
+        if (!BoxesWithValue[6][5]) {
             int x;
-            if("".equals(SevenSixLabel.getText())) {
+            if ("".equals(SevenSixLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SevenSixLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SevenSixLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SevenSixLabel.setText(integers[x]);
             }
@@ -2129,17 +2123,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SevenSixLabelMouseClicked
 
     private void SevenSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenSevenLabelMouseClicked
-        if(!BoxesWithValue[6][6]){
+        if (!BoxesWithValue[6][6]) {
             int x;
-            if("".equals(SevenSevenLabel.getText())) {
+            if ("".equals(SevenSevenLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SevenSevenLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SevenSevenLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SevenSevenLabel.setText(integers[x]);
             }
@@ -2147,17 +2141,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SevenSevenLabelMouseClicked
 
     private void SevenEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenEightLabelMouseClicked
-        if(!BoxesWithValue[6][7]){
+        if (!BoxesWithValue[6][7]) {
             int x;
-            if("".equals(SevenEightLabel.getText())) {
+            if ("".equals(SevenEightLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SevenEightLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SevenEightLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SevenEightLabel.setText(integers[x]);
             }
@@ -2165,17 +2159,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SevenEightLabelMouseClicked
 
     private void SevenNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenNineLabelMouseClicked
-        if(!BoxesWithValue[6][8]){
+        if (!BoxesWithValue[6][8]) {
             int x;
-            if("".equals(SevenNineLabel.getText())) {
+            if ("".equals(SevenNineLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(SevenNineLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 SevenNineLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 SevenNineLabel.setText(integers[x]);
             }
@@ -2183,17 +2177,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_SevenNineLabelMouseClicked
 
     private void EightOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EightOneLabelMouseClicked
-         if(!BoxesWithValue[7][0]){
+        if (!BoxesWithValue[7][0]) {
             int x;
-            if("".equals(EightOneLabel.getText())) {
+            if ("".equals(EightOneLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(EightOneLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 EightOneLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 EightOneLabel.setText(integers[x]);
             }
@@ -2201,17 +2195,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_EightOneLabelMouseClicked
 
     private void EightTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EightTwoLabelMouseClicked
-        if(!BoxesWithValue[7][1]){
+        if (!BoxesWithValue[7][1]) {
             int x;
-            if("".equals(EightTwoLabel.getText())) {
+            if ("".equals(EightTwoLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(EightTwoLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 EightTwoLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 EightTwoLabel.setText(integers[x]);
             }
@@ -2219,17 +2213,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_EightTwoLabelMouseClicked
 
     private void EightThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EightThreeLabelMouseClicked
-        if(!BoxesWithValue[7][2]){
+        if (!BoxesWithValue[7][2]) {
             int x;
-            if("".equals(EightThreeLabel.getText())) {
+            if ("".equals(EightThreeLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(EightThreeLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 EightThreeLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 EightThreeLabel.setText(integers[x]);
             }
@@ -2237,17 +2231,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_EightThreeLabelMouseClicked
 
     private void EightFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EightFourLabelMouseClicked
-        if(!BoxesWithValue[7][3]){
+        if (!BoxesWithValue[7][3]) {
             int x;
-            if("".equals(EightFourLabel.getText())) {
+            if ("".equals(EightFourLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(EightFourLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 EightFourLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 EightFourLabel.setText(integers[x]);
             }
@@ -2255,17 +2249,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_EightFourLabelMouseClicked
 
     private void EightFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EightFiveLabelMouseClicked
-        if(!BoxesWithValue[7][4]){
+        if (!BoxesWithValue[7][4]) {
             int x;
-            if("".equals(EightFiveLabel.getText())) {
+            if ("".equals(EightFiveLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(EightFiveLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 EightFiveLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 EightFiveLabel.setText(integers[x]);
             }
@@ -2273,17 +2267,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_EightFiveLabelMouseClicked
 
     private void EightSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EightSixLabelMouseClicked
-        if(!BoxesWithValue[7][5]){
+        if (!BoxesWithValue[7][5]) {
             int x;
-            if("".equals(EightSixLabel.getText())) {
+            if ("".equals(EightSixLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(EightSixLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 EightSixLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 EightSixLabel.setText(integers[x]);
             }
@@ -2291,17 +2285,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_EightSixLabelMouseClicked
 
     private void EightSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EightSevenLabelMouseClicked
-        if(!BoxesWithValue[7][6]){
+        if (!BoxesWithValue[7][6]) {
             int x;
-            if("".equals(EightSevenLabel.getText())) {
+            if ("".equals(EightSevenLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(EightSevenLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 EightSevenLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 EightSevenLabel.setText(integers[x]);
             }
@@ -2309,17 +2303,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_EightSevenLabelMouseClicked
 
     private void EightEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EightEightLabelMouseClicked
-        if(!BoxesWithValue[7][7]){
+        if (!BoxesWithValue[7][7]) {
             int x;
-            if("".equals(EightEightLabel.getText())) {
+            if ("".equals(EightEightLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(EightEightLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 EightEightLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 EightEightLabel.setText(integers[x]);
             }
@@ -2327,17 +2321,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_EightEightLabelMouseClicked
 
     private void EightNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EightNineLabelMouseClicked
-        if(!BoxesWithValue[7][8]){
+        if (!BoxesWithValue[7][8]) {
             int x;
-            if("".equals(EightNineLabel.getText())) {
+            if ("".equals(EightNineLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(EightNineLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 EightNineLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 EightNineLabel.setText(integers[x]);
             }
@@ -2345,17 +2339,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_EightNineLabelMouseClicked
 
     private void NineOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NineOneLabelMouseClicked
-       if(!BoxesWithValue[8][0]){
+        if (!BoxesWithValue[8][0]) {
             int x;
-            if("".equals(NineOneLabel.getText())) {
+            if ("".equals(NineOneLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(NineOneLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 NineOneLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 NineOneLabel.setText(integers[x]);
             }
@@ -2363,17 +2357,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_NineOneLabelMouseClicked
 
     private void NineTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NineTwoLabelMouseClicked
-        if(!BoxesWithValue[8][1]){
+        if (!BoxesWithValue[8][1]) {
             int x;
-            if("".equals(NineTwoLabel.getText())) {
+            if ("".equals(NineTwoLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(NineTwoLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 NineTwoLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 NineTwoLabel.setText(integers[x]);
             }
@@ -2381,17 +2375,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_NineTwoLabelMouseClicked
 
     private void NineThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NineThreeLabelMouseClicked
-        if(!BoxesWithValue[8][2]){
+        if (!BoxesWithValue[8][2]) {
             int x;
-            if("".equals(NineThreeLabel.getText())) {
+            if ("".equals(NineThreeLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(NineThreeLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 NineThreeLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 NineThreeLabel.setText(integers[x]);
             }
@@ -2399,17 +2393,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_NineThreeLabelMouseClicked
 
     private void NineFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NineFourLabelMouseClicked
-        if(!BoxesWithValue[8][3]){
+        if (!BoxesWithValue[8][3]) {
             int x;
-            if("".equals(NineFourLabel.getText())) {
+            if ("".equals(NineFourLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(NineFourLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 NineFourLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 NineFourLabel.setText(integers[x]);
             }
@@ -2417,17 +2411,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_NineFourLabelMouseClicked
 
     private void NineFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NineFiveLabelMouseClicked
-        if(!BoxesWithValue[8][4]){
+        if (!BoxesWithValue[8][4]) {
             int x;
-            if("".equals(NineFiveLabel.getText())) {
+            if ("".equals(NineFiveLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(NineFiveLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 NineFiveLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 NineFiveLabel.setText(integers[x]);
             }
@@ -2435,17 +2429,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_NineFiveLabelMouseClicked
 
     private void NineSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NineSixLabelMouseClicked
-        if(!BoxesWithValue[8][5]){
+        if (!BoxesWithValue[8][5]) {
             int x;
-            if("".equals(NineSixLabel.getText())) {
+            if ("".equals(NineSixLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(NineSixLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 NineSixLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 NineSixLabel.setText(integers[x]);
             }
@@ -2453,17 +2447,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_NineSixLabelMouseClicked
 
     private void NineSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NineSevenLabelMouseClicked
-        if(!BoxesWithValue[8][6]){
+        if (!BoxesWithValue[8][6]) {
             int x;
-            if("".equals(NineSevenLabel.getText())) {
+            if ("".equals(NineSevenLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(NineSevenLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 NineSevenLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 NineSevenLabel.setText(integers[x]);
             }
@@ -2471,17 +2465,17 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_NineSevenLabelMouseClicked
 
     private void NineEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NineEightLabelMouseClicked
-        if(!BoxesWithValue[8][7]){
+        if (!BoxesWithValue[8][7]) {
             int x;
-            if("".equals(NineEightLabel.getText())) {
+            if ("".equals(NineEightLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(NineEightLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 NineEightLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 NineEightLabel.setText(integers[x]);
             }
@@ -2489,117 +2483,117 @@ public class GameWindow extends javax.swing.JFrame{
     }//GEN-LAST:event_NineEightLabelMouseClicked
 
     private void NineNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NineNineLabelMouseClicked
-        if(!BoxesWithValue[8][8]){
+        if (!BoxesWithValue[8][8]) {
             int x;
-            if("".equals(NineNineLabel.getText())) {
+            if ("".equals(NineNineLabel.getText())) {
                 x = 0;
             } else {
                 x = Integer.valueOf(NineNineLabel.getText());
             }
-            
-            if(x>=1 && x<9)
+
+            if (x >= 1 && x < 9) {
                 NineNineLabel.setText(integers[x]);
-            else{
+            } else {
                 x = 0;
                 NineNineLabel.setText(integers[x]);
             }
         }
     }//GEN-LAST:event_NineNineLabelMouseClicked
-
+    */
     private void AnswerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnswerButtonMouseClicked
-        for(int e = 0; e < 9; e++){
-               for(int y = 0; y < 9; y++){
-                   System.out.print(SudokuBoxes[e][y] + " ");
-               }
-               System.out.println();
-           }
-        System.out.println();
-        
-        
-        if(AnswerButton.getText().equals("Compare Solution")){
-        for(int i = 0; i < 9; i++){
-            for(int y = 0; y < 9; y++){
-                //if(!(ArrayToLabel.get(Integer.toString(i*9 + (y+1))).getText().equals(""))){
-                    //playerChoice[i][y] =  Integer.valueOf(ArrayToLabel.get(Integer.toString(i*9 + (y+1))).getText());
-                    //if(SudokuBoxes[i][y] != playerChoice[i][y])
-                        //SudokuBoxesmodel = false;
-                    //compare(i, y, playerChoice[i][y]);
-                //} else
-                    //correct = false;
-                ArrayToLabel.get(Integer.toString(i*9 + (y+1))).setText(Integer.toString(SudokuBoxes[i][y]));
-                System.out.print(SudokuBoxes[i][y] + " ");
+        for (int e = 0; e < 9; e++) {
+            for (int y = 0; y < 9; y++) {
+                System.out.print(SudokuBoxes[e][y] + " ");
             }
             System.out.println();
         }
-        CheckAnswer();
-        AnswerButton.setText("Continue?");
-        } else{
+        System.out.println();
+        
+        
+
+        if (AnswerButton.getText().equals("Compare Solution")) {
+            for (int i = 0; i < 9; i++) {
+                for (int y = 0; y < 9; y++) {
+                //if(!(ArrayToLabel.get(Integer.toString(i*9 + (y+1))).getText().equals(""))){
+                    //playerChoice[i][y] =  Integer.valueOf(ArrayToLabel.get(Integer.toString(i*9 + (y+1))).getText());
+                    //if(SudokuBoxes[i][y] != playerChoice[i][y])
+                    //SudokuBoxesmodel = false;
+                    //compare(i, y, playerChoice[i][y]);
+                    //} else
+                    //correct = false;
+                    ArrayToLabel.get(Integer.toString(i * 9 + (y + 1))).setText(Integer.toString(SudokuBoxes[i][y]));
+                    System.out.print(SudokuBoxes[i][y] + " ");
+                }
+                System.out.println();
+            }
+            CheckAnswer();
+            AnswerButton.setText("Continue?");
+        } else {
             explanation.clear();
-            for(int i = 0; i < 9; i++){
-                for(int y = 0; y < 9; y++){
-                    ArrayToLabel.get(Integer.toString(i*9 + y + 1)).setForeground(new Color(0,0,0));
+            for (int i = 0; i < 9; i++) {
+                for (int y = 0; y < 9; y++) {
+                    ArrayToLabel.get(Integer.toString(i * 9 + y + 1)).setForeground(new Color(0, 0, 0));
                 }
             }
             AnswerButton.setText("Compare Solution");
-        }            
+        }
     }//GEN-LAST:event_AnswerButtonMouseClicked
 
-    private void compare(int row, int column, int value){
-        for(int i = 0; i < 9; i++){
-            if(i != column && playerChoice[row][i] == value){
+    private void compare(int row, int column, int value) {
+        for (int i = 0; i < 9; i++) {
+            if (i != column && playerChoice[row][i] == value) {
                 correct = false;
-                ChangeToWrong(row*9 + column+1);
-                ChangeToWrong(row*9 + i+1);
+                ChangeToWrong(row * 9 + column + 1);
+                ChangeToWrong(row * 9 + i + 1);
             }
         }
-        for(int i = 0; i < 9; i++){
-            if(i != row && playerChoice[i][column] == value){
+        for (int i = 0; i < 9; i++) {
+            if (i != row && playerChoice[i][column] == value) {
                 correct = false;
-                ChangeToWrong(row*9 + column+1);
-                ChangeToWrong(i*9 + column+1);
+                ChangeToWrong(row * 9 + column + 1);
+                ChangeToWrong(i * 9 + column + 1);
             }
         }
-        
-        int _row = (row/3) *3, _column = (column/3) *3;
-        for(int i = _row; i < _row+3; i++){
-            for(int y = _column; y < _column+3; y++){
-                if(i != row && y != column && playerChoice[i][y] == value){
+
+        int _row = (row / 3) * 3, _column = (column / 3) * 3;
+        for (int i = _row; i < _row + 3; i++) {
+            for (int y = _column; y < _column + 3; y++) {
+                if (i != row && y != column && playerChoice[i][y] == value) {
                     correct = false;
-                    ChangeToWrong(row*9 + column+1);                    
-                    ChangeToWrong(i*9 + y+1);                    
+                    ChangeToWrong(row * 9 + column + 1);
+                    ChangeToWrong(i * 9 + y + 1);
                 }
-            }            
-        }      
-    }
-    
-    private void CheckAnswer(){
-        if(SudokuBoxesmodel)
-            explanation.addElement("That is the correct answer! Good Job!");
-        else if(correct){
-            explanation.addElement("This isn't the pattern the"); 
-            explanation.addElement("machine came up with but"); 
-            explanation.addElement("it works! Good Job!");                        
+            }
         }
-        else{
-            explanation.addElement("Aww, Too bad. That isn't"); 
-            explanation.addElement("the correct answer. Try"); 
-            explanation.addElement("again!");            
-        }       
     }
-    
-    private void ChangeToWrong(int key){
-        ArrayToLabel.get(Integer.toString(key)).setForeground(new Color(255, 0, 0));       
+
+    private void CheckAnswer() {
+        if (SudokuBoxesmodel) {
+            explanation.addElement("That is the correct answer! Good Job!");
+        } else if (correct) {
+            explanation.addElement("This isn't the pattern the");
+            explanation.addElement("machine came up with but");
+            explanation.addElement("it works! Good Job!");
+        } else {
+            explanation.addElement("Aww, Too bad. That isn't");
+            explanation.addElement("the correct answer. Try");
+            explanation.addElement("again!");
+        }
     }
-    
+
+    private void ChangeToWrong(int key) {
+        ArrayToLabel.get(Integer.toString(key)).setForeground(new Color(255, 0, 0));
+    }
+
     private void Map() { //Mapping
-        for(int e = 0; e < 9; e++){
-               for(int y = 0; y < 9; y++){
-                   System.out.print(SudokuBoxes[e][y] + " ");
-               }
-               System.out.println();
-           }
+        for (int e = 0; e < 9; e++) {
+            for (int y = 0; y < 9; y++) {
+                System.out.print(SudokuBoxes[e][y] + " ");
+            }
+            System.out.println();
+        }
         System.out.println();
-        
+
         ArrayToLabel.put("1", OneOneLabel);
         ArrayToLabel.put("2", OneTwoLabel);
         ArrayToLabel.put("3", OneThreeLabel);
@@ -2681,59 +2675,61 @@ public class GameWindow extends javax.swing.JFrame{
         ArrayToLabel.put("79", NineSevenLabel);
         ArrayToLabel.put("80", NineEightLabel);
         ArrayToLabel.put("81", NineNineLabel);
-        
-        for(int i = 0; i < 9; i++){
-            for(int y = 0; y < 9; y++){
-                if(BoxesWithValue[i][y]){ // Assign Decided values their respective numbers
-                    try{
+
+        for (int i = 0; i < 9; i++) {
+            for (int y = 0; y < 9; y++) {
+                if (BoxesWithValue[i][y]) { // Assign Decided values their respective numbers
+                    try {
                         Font Bolden = new Font("Tahoma", Font.BOLD, 36);
-                        ArrayToLabel.get(Integer.toString((i*9) + (y+1))).setFont(Bolden);
-                        ArrayToLabel.get(Integer.toString((i*9) + (y+1))).setText(Integer.toString(SudokuBoxes[i][y]));                         
-                    } catch(NullPointerException n){
+                        ArrayToLabel.get(Integer.toString((i * 9) + (y + 1))).setFont(Bolden);
+                        ArrayToLabel.get(Integer.toString((i * 9) + (y + 1))).setText(Integer.toString(SudokuBoxes[i][y]));
+                    } catch (NullPointerException n) {
                         System.out.println("NO");
-                    }                   
+                    }
                 }
             }
         }
-        for(int e = 0; e < 9; e++){
-               for(int y = 0; y < 9; y++){
-                   System.out.print(SudokuBoxes[e][y] + " ");
-               }
-               System.out.println();
-           }
+        for (int e = 0; e < 9; e++) {
+            for (int y = 0; y < 9; y++) {
+                System.out.print(SudokuBoxes[e][y] + " ");
+            }
+            System.out.println();
+        }
         System.out.println();
     }
+
     //Actions to preform when called from HelpMenu
-    public void Example(){
+
+    public void Example() {
         //List of the explanation
         final String[][] description = {new String[]{"Here we have a possible", "Sudoku Puzzle. It is 9 by 9",
-                "with 9 boxes, rows and", "columns."}, new String[]{"In the first box we have", "values of 1, 2, 3, 4, and 5.",
-                 "This means that those", "values can not appear in", "the 1st box again."}, new String[]{"Additionally, "
-                + "1, 2, and 3", "can not appear in the first", "row and 1, 4, and 5 can not", "appear in the"
-                + " 1st column."}, new String[]{"Normally puzzles will have", "more values shown and", "they'll be spread "
-                + "out more."}, new String[]{"Try to solve this small", "puzzle yourself. When", "you are ready,", "go back and select", "Play."}};
-        
+            "with 9 boxes, rows and", "columns."}, new String[]{"In the first box we have", "values of 1, 2, 3, 4, and 5.",
+            "This means that those", "values can not appear in", "the 1st box again."}, new String[]{"Additionally, "
+            + "1, 2, and 3", "can not appear in the first", "row and 1, 4, and 5 can not", "appear in the"
+            + " 1st column."}, new String[]{"Normally puzzles will have", "more values shown and", "they'll be spread "
+            + "out more."}, new String[]{"Try to solve this small", "puzzle yourself. When", "you are ready,", "go back and select", "Play."}};
+
         ComputerButton.setVisible(false);
         AnswerButton.setVisible(false);    //Simplify view for newbie
         StepButton.setVisible(true);
-        final int[] i = {0};        
+        final int[] i = {0};
         StepButton.addMouseListener(new java.awt.event.MouseAdapter() { // Allow person to click through steps
-            public void mouseClicked(java.awt.event.MouseEvent evt) {               
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Explain(description, i);
             }
-        });       
-    } 
-    private void Explain(String[][] description, int[] i){ // I passed an array because I couldnt think of Alternatives
-        for(int y = 0; y < description[i[0]].length; y++){
-            explanation.addElement(description[i[0]][y]); 
-        }      
-        i[0]++;         
-        if(i[0] > 4){
-            StepButton.setVisible(false);            
+        });
+    }
+
+    private void Explain(String[][] description, int[] i) { // I passed an array because I couldnt think of Alternatives
+        for (int y = 0; y < description[i[0]].length; y++) {
+            explanation.addElement(description[i[0]][y]);
+        }
+        i[0]++;
+        if (i[0] > 4) {
+            StepButton.setVisible(false);
         }
     }
-    
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -2855,4 +2851,3 @@ public class GameWindow extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
-
