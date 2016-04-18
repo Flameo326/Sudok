@@ -8,8 +8,8 @@ public class Block {
     int answer;
     boolean shown;
     
-    public Block(JLabel label, int answer, boolean shown){
-        this.label = label;
+    public Block(int answer, boolean shown){
+        label = new JLabel();
         this.answer = answer;
         this.shown = shown;
         

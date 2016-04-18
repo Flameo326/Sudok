@@ -2,7 +2,6 @@ package sudoku;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 
@@ -12,12 +11,23 @@ public class GameWindow extends javax.swing.JFrame {
     
     int[][] playerChoice; //Answer Key and Players answers
     boolean correct = true;
+    Block[] blocks;
     
-    DefaultListModel explanation;     // Descripton of events going on
-    Map<String, JLabel> ArrayToLabel; // map fr connections of string to labels
+    DefaultListModel explanation;     // Descripton of events going on    
 
     public GameWindow(int[][] SudokuBoxes, boolean[][] BoxesWithValue) {
         explanation = new DefaultListModel();        
+        
+        int z= 10;
+        for(int i = 0; i < 9; i++){
+            int x = 10;
+            for(int y = 0; y < 9; y++){
+                blocks[i] = new Block(SudokuBoxes[i][y], BoxesWithValue[i][y]);
+                getContentPane().add(blocks[i].getLabel(), new org.netbeans.lib.awtextra.AbsoluteConstraints(x, z, 30, 30));
+                x += 30;
+            }
+            z += 40;
+        }
         
         // May need to Adjust??????
         setContentPane(new Paint());     //Create a valid looking Sudoku Puzzle
@@ -1044,7 +1054,7 @@ public class GameWindow extends javax.swing.JFrame {
 
 // This will allow the Labels to toggle between numbers if It hasnt been assigned a number (81 Labels)
     private void OneOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneOneLabelMouseClicked
-        if (!BoxesWithValue[0][0]) {
+        /*if (!BoxesWithValue[0][0]) {
             int x;
             if ("".equals(OneOneLabel.getText())) {
                 x = 0;
@@ -1059,10 +1069,11 @@ public class GameWindow extends javax.swing.JFrame {
                 OneOneLabel.setText(integers[x]);
             }
         }
+        */
     }//GEN-LAST:event_OneOneLabelMouseClicked
 
     private void OneTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneTwoLabelMouseClicked
-        if (!BoxesWithValue[0][1]) {
+        /*if (!BoxesWithValue[0][1]) {
             int x;
             if ("".equals(OneTwoLabel.getText())) {
                 x = 0;
@@ -1076,11 +1087,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 OneTwoLabel.setText(integers[x]);
             }
-        }
+        }*/
     }//GEN-LAST:event_OneTwoLabelMouseClicked
 
     private void OneThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneThreeLabelMouseClicked
-        if (!BoxesWithValue[0][2]) {
+       /* if (!BoxesWithValue[0][2]) {
             int x;
             if ("".equals(OneThreeLabel.getText())) {
                 x = 0;
@@ -1094,11 +1105,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 OneThreeLabel.setText(integers[x]);
             }
-        }
+        }*/
     }//GEN-LAST:event_OneThreeLabelMouseClicked
 
     private void OneFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneFourLabelMouseClicked
-        if (!BoxesWithValue[0][3]) {
+        /*if (!BoxesWithValue[0][3]) {
             int x;
             if ("".equals(OneFourLabel.getText())) {
                 x = 0;
@@ -1112,11 +1123,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 OneFourLabel.setText(integers[x]);
             }
-        }
+        }*/
     }//GEN-LAST:event_OneFourLabelMouseClicked
 
     private void OneFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneFiveLabelMouseClicked
-        if (!BoxesWithValue[0][4]) {
+       /* if (!BoxesWithValue[0][4]) {
             int x;
             if ("".equals(OneFiveLabel.getText())) {
                 x = 0;
@@ -1130,11 +1141,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 OneFiveLabel.setText(integers[x]);
             }
-        }
+        }*/
     }//GEN-LAST:event_OneFiveLabelMouseClicked
 
     private void OneSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneSixLabelMouseClicked
-        if (!BoxesWithValue[0][5]) {
+        /*if (!BoxesWithValue[0][5]) {
             int x;
             if ("".equals(OneSixLabel.getText())) {
                 x = 0;
@@ -1148,11 +1159,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 OneSixLabel.setText(integers[x]);
             }
-        }
+        }*/
     }//GEN-LAST:event_OneSixLabelMouseClicked
 
     private void OneSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneSevenLabelMouseClicked
-        if (!BoxesWithValue[0][6]) {
+       /* if (!BoxesWithValue[0][6]) {
             int x;
             if ("".equals(OneSevenLabel.getText())) {
                 x = 0;
@@ -1166,11 +1177,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 OneSevenLabel.setText(integers[x]);
             }
-        }
+        }*/
     }//GEN-LAST:event_OneSevenLabelMouseClicked
 
     private void OneEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneEightLabelMouseClicked
-        if (!BoxesWithValue[0][7]) {
+        /*if (!BoxesWithValue[0][7]) {
             int x;
             if ("".equals(OneEightLabel.getText())) {
                 x = 0;
@@ -1184,11 +1195,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 OneEightLabel.setText(integers[x]);
             }
-        }
+        }*/
     }//GEN-LAST:event_OneEightLabelMouseClicked
 
     private void OneNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OneNineLabelMouseClicked
-        if (!BoxesWithValue[0][8]) {
+       /* if (!BoxesWithValue[0][8]) {
             int x;
             if ("".equals(OneNineLabel.getText())) {
                 x = 0;
@@ -1202,11 +1213,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 OneNineLabel.setText(integers[x]);
             }
-        }
+        }*/
     }//GEN-LAST:event_OneNineLabelMouseClicked
 
     private void TwoOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoOneLabelMouseClicked
-        if (!BoxesWithValue[1][0]) {
+       /* if (!BoxesWithValue[1][0]) {
             int x;
             if ("".equals(TwoOneLabel.getText())) {
                 x = 0;
@@ -1220,11 +1231,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 TwoOneLabel.setText(integers[x]);
             }
-        }
+        }*/
     }//GEN-LAST:event_TwoOneLabelMouseClicked
 
     private void TwoTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoTwoLabelMouseClicked
-        if (!BoxesWithValue[1][1]) {
+        //if (!BoxesWithValue[1][1]) {
             int x;
             if ("".equals(TwoTwoLabel.getText())) {
                 x = 0;
@@ -1238,11 +1249,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 TwoTwoLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_TwoTwoLabelMouseClicked
 
     private void ThreeOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeOneLabelMouseClicked
-        if (!BoxesWithValue[2][0]) {
+        //if (!BoxesWithValue[2][0]) {
             int x;
             if ("".equals(ThreeOneLabel.getText())) {
                 x = 0;
@@ -1256,11 +1267,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 ThreeOneLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_ThreeOneLabelMouseClicked
 
     private void TwoThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoThreeLabelMouseClicked
-        if (!BoxesWithValue[1][2]) {
+        //if (!BoxesWithValue[1][2]) {
             int x;
             if ("".equals(TwoThreeLabel.getText())) {
                 x = 0;
@@ -1274,11 +1285,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 TwoThreeLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_TwoThreeLabelMouseClicked
 
     private void TwoFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoFourLabelMouseClicked
-        if (!BoxesWithValue[1][3]) {
+        //if (!BoxesWithValue[1][3]) {
             int x;
             if ("".equals(TwoFourLabel.getText())) {
                 x = 0;
@@ -1292,11 +1303,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 TwoFourLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_TwoFourLabelMouseClicked
 
     private void TwoFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoFiveLabelMouseClicked
-        if (!BoxesWithValue[1][4]) {
+        //if (!BoxesWithValue[1][4]) {
             int x;
             if ("".equals(TwoFiveLabel.getText())) {
                 x = 0;
@@ -1310,11 +1321,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 TwoFiveLabel.setText(integers[x]);
             }
-        }
+       // }
     }//GEN-LAST:event_TwoFiveLabelMouseClicked
 
     private void TwoSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoSixLabelMouseClicked
-        if (!BoxesWithValue[1][5]) {
+        //if (!BoxesWithValue[1][5]) {
             int x;
             if ("".equals(TwoSixLabel.getText())) {
                 x = 0;
@@ -1328,11 +1339,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 TwoSixLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_TwoSixLabelMouseClicked
 
     private void TwoSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoSevenLabelMouseClicked
-        if (!BoxesWithValue[1][6]) {
+        //if (!BoxesWithValue[1][6]) {
             int x;
             if ("".equals(TwoSevenLabel.getText())) {
                 x = 0;
@@ -1346,11 +1357,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 TwoSevenLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_TwoSevenLabelMouseClicked
 
     private void TwoEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoEightLabelMouseClicked
-        if (!BoxesWithValue[1][7]) {
+        ///if (!BoxesWithValue[1][7]) {
             int x;
             if ("".equals(TwoEightLabel.getText())) {
                 x = 0;
@@ -1364,11 +1375,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 TwoEightLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_TwoEightLabelMouseClicked
 
     private void TwoNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TwoNineLabelMouseClicked
-        if (!BoxesWithValue[1][8]) {
+        //if (!BoxesWithValue[1][8]) {
             int x;
             if ("".equals(TwoNineLabel.getText())) {
                 x = 0;
@@ -1382,11 +1393,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 TwoNineLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_TwoNineLabelMouseClicked
 
     private void ThreeTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeTwoLabelMouseClicked
-        if (!BoxesWithValue[2][1]) {
+        //if (!BoxesWithValue[2][1]) {
             int x;
             if ("".equals(ThreeTwoLabel.getText())) {
                 x = 0;
@@ -1400,11 +1411,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 ThreeTwoLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_ThreeTwoLabelMouseClicked
 
     private void ThreeThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeThreeLabelMouseClicked
-        if (!BoxesWithValue[2][2]) {
+       // if (!BoxesWithValue[2][2]) {
             int x;
             if ("".equals(ThreeThreeLabel.getText())) {
                 x = 0;
@@ -1418,11 +1429,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 ThreeThreeLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_ThreeThreeLabelMouseClicked
 
     private void ThreeFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeFourLabelMouseClicked
-        if (!BoxesWithValue[2][3]) {
+        //if (!BoxesWithValue[2][3]) {
             int x;
             if ("".equals(ThreeFourLabel.getText())) {
                 x = 0;
@@ -1436,11 +1447,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 ThreeFourLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_ThreeFourLabelMouseClicked
 
     private void ThreeFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeFiveLabelMouseClicked
-        if (!BoxesWithValue[2][4]) {
+        //if (!BoxesWithValue[2][4]) {
             int x;
             if ("".equals(ThreeFiveLabel.getText())) {
                 x = 0;
@@ -1454,11 +1465,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 ThreeFiveLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_ThreeFiveLabelMouseClicked
 
     private void ThreeSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeSixLabelMouseClicked
-        if (!BoxesWithValue[2][5]) {
+        //if (!BoxesWithValue[2][5]) {
             int x;
             if ("".equals(ThreeSixLabel.getText())) {
                 x = 0;
@@ -1472,11 +1483,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 ThreeSixLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_ThreeSixLabelMouseClicked
 
     private void ThreeSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeSevenLabelMouseClicked
-        if (!BoxesWithValue[2][6]) {
+      //  if (!BoxesWithValue[2][6]) {
             int x;
             if ("".equals(ThreeSevenLabel.getText())) {
                 x = 0;
@@ -1490,11 +1501,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 ThreeSevenLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_ThreeSevenLabelMouseClicked
 
     private void ThreeEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeEightLabelMouseClicked
-        if (!BoxesWithValue[2][7]) {
+       // if (!BoxesWithValue[2][7]) {
             int x;
             if ("".equals(ThreeEightLabel.getText())) {
                 x = 0;
@@ -1508,11 +1519,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 ThreeEightLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_ThreeEightLabelMouseClicked
 
     private void ThreeNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThreeNineLabelMouseClicked
-        if (!BoxesWithValue[2][8]) {
+        //if (!BoxesWithValue[2][8]) {
             int x;
             if ("".equals(ThreeNineLabel.getText())) {
                 x = 0;
@@ -1526,11 +1537,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 ThreeNineLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_ThreeNineLabelMouseClicked
 
     private void FourOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourOneLabelMouseClicked
-        if (!BoxesWithValue[3][0]) {
+        //if (!BoxesWithValue[3][0]) {
             int x;
             if ("".equals(FourOneLabel.getText())) {
                 x = 0;
@@ -1544,11 +1555,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FourOneLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_FourOneLabelMouseClicked
 
     private void FourTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourTwoLabelMouseClicked
-        if (!BoxesWithValue[3][1]) {
+        //if (!BoxesWithValue[3][1]) {
             int x;
             if ("".equals(FourTwoLabel.getText())) {
                 x = 0;
@@ -1562,11 +1573,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FourTwoLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_FourTwoLabelMouseClicked
 
     private void FourThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourThreeLabelMouseClicked
-        if (!BoxesWithValue[3][2]) {
+        //if (!BoxesWithValue[3][2]) {
             int x;
             if ("".equals(FourThreeLabel.getText())) {
                 x = 0;
@@ -1580,11 +1591,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FourThreeLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_FourThreeLabelMouseClicked
 
     private void FourFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourFourLabelMouseClicked
-        if (!BoxesWithValue[3][3]) {
+       // if (!BoxesWithValue[3][3]) {
             int x;
             if ("".equals(FourFourLabel.getText())) {
                 x = 0;
@@ -1598,11 +1609,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FourFourLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_FourFourLabelMouseClicked
 
     private void FourFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourFiveLabelMouseClicked
-        if (!BoxesWithValue[3][4]) {
+        //if (!BoxesWithValue[3][4]) {
             int x;
             if ("".equals(FourFiveLabel.getText())) {
                 x = 0;
@@ -1616,11 +1627,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FourFiveLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_FourFiveLabelMouseClicked
 
     private void FourSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourSixLabelMouseClicked
-        if (!BoxesWithValue[3][5]) {
+        //if (!BoxesWithValue[3][5]) {
             int x;
             if ("".equals(FourSixLabel.getText())) {
                 x = 0;
@@ -1634,11 +1645,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FourSixLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_FourSixLabelMouseClicked
 
     private void FourSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourSevenLabelMouseClicked
-        if (!BoxesWithValue[3][6]) {
+        //if (!BoxesWithValue[3][6]) {
             int x;
             if ("".equals(FourSevenLabel.getText())) {
                 x = 0;
@@ -1652,11 +1663,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FourSevenLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_FourSevenLabelMouseClicked
 
     private void FourEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourEightLabelMouseClicked
-        if (!BoxesWithValue[3][7]) {
+        //if (!BoxesWithValue[3][7]) {
             int x;
             if ("".equals(FourEightLabel.getText())) {
                 x = 0;
@@ -1670,11 +1681,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FourEightLabel.setText(integers[x]);
             }
-        }
+       // }
     }//GEN-LAST:event_FourEightLabelMouseClicked
 
     private void FourNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FourNineLabelMouseClicked
-        if (!BoxesWithValue[3][8]) {
+       // if (!BoxesWithValue[3][8]) {
             int x;
             if ("".equals(FourNineLabel.getText())) {
                 x = 0;
@@ -1688,11 +1699,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FourNineLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_FourNineLabelMouseClicked
 
     private void FiveOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveOneLabelMouseClicked
-        if (!BoxesWithValue[4][0]) {
+        //if (!BoxesWithValue[4][0]) {
             int x;
             if ("".equals(FiveOneLabel.getText())) {
                 x = 0;
@@ -1706,11 +1717,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FiveOneLabel.setText(integers[x]);
             }
-        }
+       // }
     }//GEN-LAST:event_FiveOneLabelMouseClicked
 
     private void FiveTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveTwoLabelMouseClicked
-        if (!BoxesWithValue[4][1]) {
+        //if (!BoxesWithValue[4][1]) {
             int x;
             if ("".equals(FiveTwoLabel.getText())) {
                 x = 0;
@@ -1724,11 +1735,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FiveTwoLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_FiveTwoLabelMouseClicked
 
     private void FiveThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveThreeLabelMouseClicked
-        if (!BoxesWithValue[4][2]) {
+        //if (!BoxesWithValue[4][2]) {
             int x;
             if ("".equals(FiveThreeLabel.getText())) {
                 x = 0;
@@ -1742,11 +1753,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FiveThreeLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_FiveThreeLabelMouseClicked
 
     private void FiveFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveFourLabelMouseClicked
-        if (!BoxesWithValue[4][3]) {
+       // if (!BoxesWithValue[4][3]) {
             int x;
             if ("".equals(FiveFourLabel.getText())) {
                 x = 0;
@@ -1760,11 +1771,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FiveFourLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_FiveFourLabelMouseClicked
 
     private void FiveFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveFiveLabelMouseClicked
-        if (!BoxesWithValue[4][4]) {
+        //if (!BoxesWithValue[4][4]) {
             int x;
             if ("".equals(FiveFiveLabel.getText())) {
                 x = 0;
@@ -1778,11 +1789,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FiveFiveLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_FiveFiveLabelMouseClicked
 
     private void FiveSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveSixLabelMouseClicked
-        if (!BoxesWithValue[4][5]) {
+       // if (!BoxesWithValue[4][5]) {
             int x;
             if ("".equals(FiveSixLabel.getText())) {
                 x = 0;
@@ -1796,11 +1807,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FiveSixLabel.setText(integers[x]);
             }
-        }
+       // }
     }//GEN-LAST:event_FiveSixLabelMouseClicked
 
     private void FiveSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveSevenLabelMouseClicked
-        if (!BoxesWithValue[4][6]) {
+       // if (!BoxesWithValue[4][6]) {
             int x;
             if ("".equals(FiveSevenLabel.getText())) {
                 x = 0;
@@ -1814,11 +1825,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FiveSevenLabel.setText(integers[x]);
             }
-        }
+        //
     }//GEN-LAST:event_FiveSevenLabelMouseClicked
 
     private void FiveEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveEightLabelMouseClicked
-        if (!BoxesWithValue[4][7]) {
+        //if (!BoxesWithValue[4][7]) {
             int x;
             if ("".equals(FiveEightLabel.getText())) {
                 x = 0;
@@ -1832,11 +1843,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FiveEightLabel.setText(integers[x]);
             }
-        }
+       // }
     }//GEN-LAST:event_FiveEightLabelMouseClicked
 
     private void FiveNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FiveNineLabelMouseClicked
-        if (!BoxesWithValue[4][8]) {
+       // if (!BoxesWithValue[4][8]) {
             int x;
             if ("".equals(FiveNineLabel.getText())) {
                 x = 0;
@@ -1850,11 +1861,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 FiveNineLabel.setText(integers[x]);
             }
-        }
+       // }
     }//GEN-LAST:event_FiveNineLabelMouseClicked
 
     private void SixOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixOneLabelMouseClicked
-        if (!BoxesWithValue[5][0]) {
+        //if (!BoxesWithValue[5][0]) {
             int x;
             if ("".equals(SixOneLabel.getText())) {
                 x = 0;
@@ -1868,11 +1879,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 SixOneLabel.setText(integers[x]);
             }
-        }
+       // }
     }//GEN-LAST:event_SixOneLabelMouseClicked
 
     private void SixTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixTwoLabelMouseClicked
-        if (!BoxesWithValue[5][1]) {
+       // if (!BoxesWithValue[5][1]) {
             int x;
             if ("".equals(SixTwoLabel.getText())) {
                 x = 0;
@@ -1886,11 +1897,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 SixTwoLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_SixTwoLabelMouseClicked
 
     private void SixThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixThreeLabelMouseClicked
-        if (!BoxesWithValue[5][2]) {
+       // if (!BoxesWithValue[5][2]) {
             int x;
             if ("".equals(SixThreeLabel.getText())) {
                 x = 0;
@@ -1904,11 +1915,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 SixThreeLabel.setText(integers[x]);
             }
-        }
+       // }
     }//GEN-LAST:event_SixThreeLabelMouseClicked
 
     private void SixFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixFourLabelMouseClicked
-        if (!BoxesWithValue[5][3]) {
+       // if (!BoxesWithValue[5][3]) {
             int x;
             if ("".equals(SixFourLabel.getText())) {
                 x = 0;
@@ -1922,11 +1933,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 SixFourLabel.setText(integers[x]);
             }
-        }
+       // }
     }//GEN-LAST:event_SixFourLabelMouseClicked
 
     private void SixFiveLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixFiveLabelMouseClicked
-        if (!BoxesWithValue[5][4]) {
+       // if (!BoxesWithValue[5][4]) {
             int x;
             if ("".equals(SixFiveLabel.getText())) {
                 x = 0;
@@ -1940,11 +1951,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 SixFiveLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_SixFiveLabelMouseClicked
 
     private void SixSixLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixSixLabelMouseClicked
-        if (!BoxesWithValue[5][5]) {
+        //if (!BoxesWithValue[5][5]) {
             int x;
             if ("".equals(SixSixLabel.getText())) {
                 x = 0;
@@ -1958,11 +1969,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 SixSixLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_SixSixLabelMouseClicked
 
     private void SixSevenLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixSevenLabelMouseClicked
-        if (!BoxesWithValue[5][6]) {
+        //if (!BoxesWithValue[5][6]) {
             int x;
             if ("".equals(SixSevenLabel.getText())) {
                 x = 0;
@@ -1976,11 +1987,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 SixSevenLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_SixSevenLabelMouseClicked
 
     private void SixEightLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixEightLabelMouseClicked
-        if (!BoxesWithValue[5][7]) {
+        //if (!BoxesWithValue[5][7]) {
             int x;
             if ("".equals(SixEightLabel.getText())) {
                 x = 0;
@@ -1994,11 +2005,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 SixEightLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_SixEightLabelMouseClicked
 
     private void SixNineLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SixNineLabelMouseClicked
-        if (!BoxesWithValue[5][8]) {
+       // if (!BoxesWithValue[5][8]) {
             int x;
             if ("".equals(SixNineLabel.getText())) {
                 x = 0;
@@ -2012,11 +2023,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 SixNineLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_SixNineLabelMouseClicked
 
     private void SevenOneLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenOneLabelMouseClicked
-        if (!BoxesWithValue[6][0]) {
+        //if (!BoxesWithValue[6][0]) {
             int x;
             if ("".equals(SevenOneLabel.getText())) {
                 x = 0;
@@ -2030,11 +2041,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 SevenOneLabel.setText(integers[x]);
             }
-        }
+       // }
     }//GEN-LAST:event_SevenOneLabelMouseClicked
 
     private void SevenTwoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenTwoLabelMouseClicked
-        if (!BoxesWithValue[6][1]) {
+        //if (!BoxesWithValue[6][1]) {
             int x;
             if ("".equals(SevenTwoLabel.getText())) {
                 x = 0;
@@ -2048,11 +2059,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 SevenTwoLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_SevenTwoLabelMouseClicked
 
     private void SevenThreeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenThreeLabelMouseClicked
-        if (!BoxesWithValue[6][2]) {
+        //if (!BoxesWithValue[6][2]) {
             int x;
             if ("".equals(SevenThreeLabel.getText())) {
                 x = 0;
@@ -2066,11 +2077,11 @@ public class GameWindow extends javax.swing.JFrame {
                 x = 0;
                 SevenThreeLabel.setText(integers[x]);
             }
-        }
+        //}
     }//GEN-LAST:event_SevenThreeLabelMouseClicked
 
     private void SevenFourLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SevenFourLabelMouseClicked
-        if (!BoxesWithValue[6][3]) {
+       // if (!BoxesWithValue[6][3]) {
             int x;
             if ("".equals(SevenFourLabel.getText())) {
                 x = 0;
