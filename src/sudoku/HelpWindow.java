@@ -33,7 +33,6 @@ public class HelpWindow extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocation(new java.awt.Point(340, 220));
         setMinimumSize(new java.awt.Dimension(560, 270));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
