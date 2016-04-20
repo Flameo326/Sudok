@@ -2,6 +2,7 @@ package sudoku;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
@@ -14,7 +15,6 @@ public class GameWindow extends javax.swing.JFrame {
     int[][] playerChoice; //Answer Key and Players answers
     boolean correct = true;
     Block[][] blocks = new Block[9][9];
-    JLabel label = new JLabel();
     
     DefaultListModel explanation;     // Descripton of events going on    
 
@@ -25,31 +25,41 @@ public class GameWindow extends javax.swing.JFrame {
         setContentPane(new Paint());     //Create a valid looking Sudoku Puzzle
         initComponents();
         
-        for(int i = 0; i < 9; i++){         
-            for(int y = 0; y < 9; y++){
-                blocks[i][y] = new Block(SudokuBoxes[i][y], BoxesWithValue[i][y]);               
-            }
-        }
-        
-        int z= 10;
-        for(int i = 0; i < 9; i++){
-            int x = 10;
-            for(int y = 0; y < 9; y++){               
+        int z = 10;
+        for( int i = 0; i < 9; i++){ 
+             int x = 10;
+            for( int y = 0; y < 9; y++){
+                blocks[i][y] = new Block(SudokuBoxes[i][y], BoxesWithValue[i][y]);
+                blocks[i][y].getLabel().setFont(new java.awt.Font("Tahoma", 0, 36)); 
+                blocks[i][y].getLabel().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                blocks[i][y].getLabel().setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                blocks[i][y].getLabel().setPreferredSize(new java.awt.Dimension(50, 50));
+                blocks[i][y].getLabel().addMouseListener(new MouseAdapter() {
+                    
+                });
+                if(BoxesWithValue[i][y]){
+                    /*
+                    label.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                            JLabel label = (JLabel)evt.getSource();
+                            System.out.println(label.getText());
+                                    blocks[i][y].labelMouseClicked(evt);
+                        }
+                    });
+                    */
+                } else
+                    label.setText(Integer.toString(SudokuBoxes[i][y]));
                 getContentPane().add(blocks[i][y].getLabel(), new AbsoluteConstraints(x, z, 30, 30));
                 x += 30;
+                
             }
             z += 40;
-        }
-        
+        }       
         
         jList1.setModel(explanation);  //Set up side for Explanations
         jList1.setVisibleRowCount(21);  // For explanation of help menu
 
-        StepButton.setVisible(false);        
-
-        
-       
-        
+        StepButton.setVisible(false);               
         
         playerChoice = new int[9][9];       
     }
