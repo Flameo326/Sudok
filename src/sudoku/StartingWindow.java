@@ -1,8 +1,10 @@
 
 package sudoku;
 
+import java.awt.Toolkit;
+
 public class StartingWindow extends javax.swing.JFrame {
-    String[] difficulty = new String[4];
+    String[] difficulty = new String[5];
     int i = 0; // class variable for difficulty button
     
     public StartingWindow() {
@@ -10,9 +12,10 @@ public class StartingWindow extends javax.swing.JFrame {
         difficulty[1] = "Medium"; //Array to toggle between for difficulty
         difficulty[2] = "Hard";
         difficulty[3] = "Extreme";
+        difficulty[4] = "Impossible";
         
         initComponents();
-        
+        this.
         DifficultyButton.setText(difficulty[i]);
     }
     
@@ -27,7 +30,9 @@ public class StartingWindow extends javax.swing.JFrame {
         PlayButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width/2 - 80), (Toolkit.getDefaultToolkit().getScreenSize().height/2 - 50));
         setResizable(false);
+        setSize(new java.awt.Dimension(180, 110));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DifficultyButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -69,7 +74,7 @@ public class StartingWindow extends javax.swing.JFrame {
 
     private void DifficultyButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DifficultyButtonMouseClicked
         i++;
-        if(i > 3) //Toggle
+        if(i > 4) //Toggle
             i = 0;
         DifficultyButton.setText(difficulty[i]);
     }//GEN-LAST:event_DifficultyButtonMouseClicked

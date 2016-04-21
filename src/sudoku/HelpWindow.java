@@ -2,6 +2,7 @@
 package sudoku;
 
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
@@ -33,6 +34,7 @@ public class HelpWindow extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width/2 - 240), (Toolkit.getDefaultToolkit().getScreenSize().height/2 - 120));
         setMinimumSize(new java.awt.Dimension(560, 270));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

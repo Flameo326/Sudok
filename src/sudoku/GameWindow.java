@@ -1,16 +1,15 @@
 package sudoku;
 
 import java.awt.Color;
-import java.awt.Font;
+import java.awt.Toolkit;
 import javax.swing.DefaultListModel;
-
 
 public class GameWindow extends javax.swing.JFrame {
     public static GameWindow singleton = null;   // For a single instance
     final static String[] integers = {"1", "2", "3", "4", "5", "6", "7", "8", "9"}; // List for toggling of boxes
+    javax.swing.JButton StepButton;
     
-    int[][] playerChoice; //Answer Key and Players answers
-    boolean correct = true;
+    int[][] playerChoice; //Answer Key and Players answers   
     Block[][] blocks = new Block[9][9];
     
     DefaultListModel explanation;     // Descripton of events going on    
@@ -20,7 +19,13 @@ public class GameWindow extends javax.swing.JFrame {
 
         // May need to Adjust??????
         setContentPane(new Paint());     //Create a valid looking Sudoku Puzzle
+        
+        
         initComponents();
+        StepButton = new javax.swing.JButton();
+        StepButton.setText("Next Step");
+        getContentPane().add(StepButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, -1, -1));
+        pack();
         
         int z = 10;
         for( int i = 0; i < 9; i++){ 
@@ -50,11 +55,11 @@ public class GameWindow extends javax.swing.JFrame {
 
         AnswerButton = new javax.swing.JButton();
         ComputerButton = new javax.swing.JButton();
-        StepButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width/2 - 225), (Toolkit.getDefaultToolkit().getScreenSize().height/2 - 200));
         setMinimumSize(new java.awt.Dimension(300, 450));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -67,10 +72,12 @@ public class GameWindow extends javax.swing.JFrame {
         getContentPane().add(AnswerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, -1));
 
         ComputerButton.setText("Step by Step");
+        ComputerButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ComputerButtonMouseClicked(evt);
+            }
+        });
         getContentPane().add(ComputerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, -1, -1));
-
-        StepButton.setText("Next Step");
-        getContentPane().add(StepButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, -1, -1));
 
         jList1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jList1.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
@@ -82,57 +89,84 @@ public class GameWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void AnswerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnswerButtonMouseClicked
-        for (int e = 0; e < 9; e++) {
-            for (int y = 0; y < 9; y++) {
-                //System.out.print(SudokuBoxes[e][y] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-        
-        
-
+        boolean match = true, correct = true;
         if (AnswerButton.getText().equals("Compare Solution")) {
             for (int i = 0; i < 9; i++) {
-                for (int y = 0; y < 9; y++) {
-                //if(!(ArrayToLabel.get(Integer.toString(i*9 + (y+1))).getText().equals(""))){
-                    //playerChoice[i][y] =  Integer.valueOf(ArrayToLabel.get(Integer.toString(i*9 + (y+1))).getText());
-                    //if(SudokuBoxes[i][y] != playerChoice[i][y])
-                    //SudokuBoxesmodel = false;
-                    //compare(i, y, playerChoice[i][y]);
-                    //} else
-                    //correct = false;
-                    //ArrayToLabel.get(Integer.toString(i * 9 + (y + 1))).setText(Integer.toString(SudokuBoxes[i][y]));
-                    //System.out.print(SudokuBoxes[i][y] + " ");
-                }
-                System.out.println();
+                for (int y = 0; y < 9; y++) {                    
+                    if(!(blocks[i][y].getLabel().getText().equals(""))){                        
+                        playerChoice[i][y] =  Integer.valueOf(blocks[i][y].getLabel().getText());
+                        if(!(blocks[i][y].checkAnswer()))                        
+                            match = false;                        
+                        correct = compare(i, y, playerChoice[i][y], correct);
+                    } else
+                        correct = false;
+                }               
             }
-            CheckAnswer();
+            CheckAnswer(match, correct);
             AnswerButton.setText("Continue?");
         } else {
             explanation.clear();
             for (int i = 0; i < 9; i++) {
                 for (int y = 0; y < 9; y++) {
-                    //ArrayToLabel.get(Integer.toString(i * 9 + y + 1)).setForeground(new Color(0, 0, 0));
+                    blocks[i][y].getLabel().setForeground(new Color(0, 0, 0));
                 }
             }
             AnswerButton.setText("Compare Solution");
         }
     }//GEN-LAST:event_AnswerButtonMouseClicked
 
-    private void compare(int row, int column, int value) {
+    private void ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComputerButtonMouseClicked
+        if(ComputerButton.getText().equals("Step by Step")){
+            explanation.addElement("This will erase all your data");
+            explanation.addElement("and allow the computer to");
+            explanation.addElement("solve this puzzle for you");
+            explanation.addElement("in a step by step guide.");
+            
+            StepButton.setVisible(true);
+            StepButton.setText("No");
+            StepButton.addMouseListener(new java.awt.event.MouseAdapter() { // Allow person to click through steps
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    explanation.clear();
+                    ComputerButton.setText("Step by Step");
+                    StepButton.setVisible(false);
+                    StepButton.removeMouseListener(this);
+                    AnswerButton.setVisible(true);                    
+                }
+            });
+            
+            AnswerButton.setVisible(false);
+            
+            ComputerButton.setText("Continue");
+        } else{           
+            for (int i = 0; i < 9; i++) {
+                for (int y = 0; y < 9; y++) {                   
+                    if(!(blocks[i][y].shown)){
+                        blocks[i][y].getLabel().removeMouseListener(blocks[i][y].mouseListener);
+                        blocks[i][y].getLabel().setText("");
+                    } 
+                }
+            }
+            explanation.clear();
+            ComputerButton.setVisible(false);
+            StepButton.setText("Next Step");
+            SolvingSudoku solSudoku = new SolvingSudoku(blocks);
+                       
+        }
+    }//GEN-LAST:event_ComputerButtonMouseClicked
+
+    private boolean compare(int row, int column, int value, boolean correct) {        
         for (int i = 0; i < 9; i++) {
             if (i != column && playerChoice[row][i] == value) {
                 correct = false;
-                ChangeToWrong(row * 9 + column + 1);
-                ChangeToWrong(row * 9 + i + 1);
+                ChangeToWrong(row,i);
+                ChangeToWrong(row,column);               
             }
         }
         for (int i = 0; i < 9; i++) {
             if (i != row && playerChoice[i][column] == value) {
                 correct = false;
-                ChangeToWrong(row * 9 + column + 1);
-                ChangeToWrong(i * 9 + column + 1);
+                ChangeToWrong(i,column);
+                ChangeToWrong(row,column);
             }
         }
 
@@ -141,146 +175,34 @@ public class GameWindow extends javax.swing.JFrame {
             for (int y = _column; y < _column + 3; y++) {
                 if (i != row && y != column && playerChoice[i][y] == value) {
                     correct = false;
-                    ChangeToWrong(row * 9 + column + 1);
-                    ChangeToWrong(i * 9 + y + 1);
+                    ChangeToWrong(i,y);
+                    ChangeToWrong(i,y);
                 }
             }
         }
+        return correct;
     }
 
-    private void CheckAnswer() {
-        //if (SudokuBoxesmodel) {
-            explanation.addElement("That is the correct answer! Good Job!");
-        //} else if (correct) {
+    private void CheckAnswer(boolean match, boolean correct) {
+        if (match) {
+            explanation.addElement("That is the correct answer!");
+            explanation.addElement("Good Job!");
+        } else if (correct) {
             explanation.addElement("This isn't the pattern the");
             explanation.addElement("machine came up with but");
             explanation.addElement("it works! Good Job!");
-        //} else {
+        } else {
             explanation.addElement("Aww, Too bad. That isn't");
             explanation.addElement("the correct answer. Try");
             explanation.addElement("again!");
-        //}
+        }
     }
 
-    private void ChangeToWrong(int key) {
-        //ArrayToLabel.get(Integer.toString(key)).setForeground(new Color(255, 0, 0));
-    }
-
-    private void Map() { //Mapping
-        for (int e = 0; e < 9; e++) {
-            for (int y = 0; y < 9; y++) {
-                //System.out.print(SudokuBoxes[e][y] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-/*
-        ArrayToLabel.put("1", OneOneLabel);
-        ArrayToLabel.put("2", OneTwoLabel);
-        ArrayToLabel.put("3", OneThreeLabel);
-        ArrayToLabel.put("4", OneFourLabel);
-        ArrayToLabel.put("5", OneFiveLabel);
-        ArrayToLabel.put("6", OneSixLabel);
-        ArrayToLabel.put("7", OneSevenLabel);
-        ArrayToLabel.put("8", OneEightLabel);
-        ArrayToLabel.put("9", OneNineLabel);
-        ArrayToLabel.put("10", TwoOneLabel);
-        ArrayToLabel.put("11", TwoTwoLabel);
-        ArrayToLabel.put("12", TwoThreeLabel);
-        ArrayToLabel.put("13", TwoFourLabel);
-        ArrayToLabel.put("14", TwoFiveLabel);
-        ArrayToLabel.put("15", TwoSixLabel);
-        ArrayToLabel.put("16", TwoSevenLabel);
-        ArrayToLabel.put("17", TwoEightLabel);
-        ArrayToLabel.put("18", TwoNineLabel);
-        ArrayToLabel.put("19", ThreeOneLabel);
-        ArrayToLabel.put("20", ThreeTwoLabel);
-        ArrayToLabel.put("21", ThreeThreeLabel);
-        ArrayToLabel.put("22", ThreeFourLabel);
-        ArrayToLabel.put("23", ThreeFiveLabel);
-        ArrayToLabel.put("24", ThreeSixLabel);
-        ArrayToLabel.put("25", ThreeSevenLabel);
-        ArrayToLabel.put("26", ThreeEightLabel);
-        ArrayToLabel.put("27", ThreeNineLabel);
-        ArrayToLabel.put("28", FourOneLabel);
-        ArrayToLabel.put("29", FourTwoLabel);
-        ArrayToLabel.put("30", FourThreeLabel);
-        ArrayToLabel.put("31", FourFourLabel);
-        ArrayToLabel.put("32", FourFiveLabel);
-        ArrayToLabel.put("33", FourSixLabel);
-        ArrayToLabel.put("34", FourSevenLabel);
-        ArrayToLabel.put("35", FourEightLabel);
-        ArrayToLabel.put("36", FourNineLabel);
-        ArrayToLabel.put("37", FiveOneLabel);
-        ArrayToLabel.put("38", FiveTwoLabel);
-        ArrayToLabel.put("39", FiveThreeLabel);
-        ArrayToLabel.put("40", FiveFourLabel);
-        ArrayToLabel.put("41", FiveFiveLabel);
-        ArrayToLabel.put("42", FiveSixLabel);
-        ArrayToLabel.put("43", FiveSevenLabel);
-        ArrayToLabel.put("44", FiveEightLabel);
-        ArrayToLabel.put("45", FiveNineLabel);
-        ArrayToLabel.put("46", SixOneLabel);
-        ArrayToLabel.put("47", SixTwoLabel);
-        ArrayToLabel.put("48", SixThreeLabel);
-        ArrayToLabel.put("49", SixFourLabel);
-        ArrayToLabel.put("50", SixFiveLabel);
-        ArrayToLabel.put("51", SixSixLabel);
-        ArrayToLabel.put("52", SixSevenLabel);
-        ArrayToLabel.put("53", SixEightLabel);
-        ArrayToLabel.put("54", SixNineLabel);
-        ArrayToLabel.put("55", SevenOneLabel);
-        ArrayToLabel.put("56", SevenTwoLabel);
-        ArrayToLabel.put("57", SevenThreeLabel);
-        ArrayToLabel.put("58", SevenFourLabel);
-        ArrayToLabel.put("59", SevenFiveLabel);
-        ArrayToLabel.put("60", SevenSixLabel);
-        ArrayToLabel.put("61", SevenSevenLabel);
-        ArrayToLabel.put("62", SevenEightLabel);
-        ArrayToLabel.put("63", SevenNineLabel);
-        ArrayToLabel.put("64", EightOneLabel);
-        ArrayToLabel.put("65", EightTwoLabel);
-        ArrayToLabel.put("66", EightThreeLabel);
-        ArrayToLabel.put("67", EightFourLabel);
-        ArrayToLabel.put("68", EightFiveLabel);
-        ArrayToLabel.put("69", EightSixLabel);
-        ArrayToLabel.put("70", EightSevenLabel);
-        ArrayToLabel.put("71", EightEightLabel);
-        ArrayToLabel.put("72", EightNineLabel);
-        ArrayToLabel.put("73", NineOneLabel);
-        ArrayToLabel.put("74", NineTwoLabel);
-        ArrayToLabel.put("75", NineThreeLabel);
-        ArrayToLabel.put("76", NineFourLabel);
-        ArrayToLabel.put("77", NineFiveLabel);
-        ArrayToLabel.put("78", NineSixLabel);
-        ArrayToLabel.put("79", NineSevenLabel);
-        ArrayToLabel.put("80", NineEightLabel);
-        ArrayToLabel.put("81", NineNineLabel);
-*/
-        for (int i = 0; i < 9; i++) {
-            for (int y = 0; y < 9; y++) {
-                //if (BoxesWithValue[i][y]) { // Assign Decided values their respective numbers
-                    //try {
-                       // Font Bolden = new Font("Tahoma", Font.BOLD, 36);
-                       // ArrayToLabel.get(Integer.toString((i * 9) + (y + 1))).setFont(Bolden);
-                        //ArrayToLabel.get(Integer.toString((i * 9) + (y + 1))).setText(Integer.toString(SudokuBoxes[i][y]));
-                    //} catch (NullPointerException n) {
-                        //System.out.println("NO");
-                    //}
-                //}
-            }
-        }
-        for (int e = 0; e < 9; e++) {
-            for (int y = 0; y < 9; y++) {
-                //System.out.print(SudokuBoxes[e][y] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
+    private void ChangeToWrong(int i, int y) {
+        blocks[i][y].getLabel().setForeground(new Color(255, 0, 0));
     }
 
     //Actions to preform when called from HelpMenu
-
     public void Example() {
         //List of the explanation
         final String[][] description = {new String[]{"Here we have a possible", "Sudoku Puzzle. It is 9 by 9",
@@ -291,7 +213,7 @@ public class GameWindow extends javax.swing.JFrame {
             + "out more."}, new String[]{"Try to solve this small", "puzzle yourself. When", "you are ready,", "go back and select", "Play."}};
 
         ComputerButton.setVisible(false);
-        AnswerButton.setVisible(false);    //Simplify view for newbie
+       // AnswerButton.setVisible(false);    //Simplify view for newbie
         StepButton.setVisible(true);
         final int[] i = {0};
         StepButton.addMouseListener(new java.awt.event.MouseAdapter() { // Allow person to click through steps
@@ -309,6 +231,11 @@ public class GameWindow extends javax.swing.JFrame {
         if (i[0] > 4) {
             StepButton.setVisible(false);
         }
+    }
+    
+    public void addMouseListenerToStepButton(java.awt.event.MouseAdapter mouseAdapter){
+        StepButton.addMouseListener(mouseAdapter);
+        StepButton.setVisible(true);
     }
 
     public static void main(String args[]) {
@@ -346,7 +273,6 @@ public class GameWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AnswerButton;
     private javax.swing.JButton ComputerButton;
-    private javax.swing.JButton StepButton;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

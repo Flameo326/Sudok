@@ -2,25 +2,25 @@
 package sudoku;
 
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 
 public class Block{
-    JLabel label;
-    int answer;
+    private JLabel label;
+    private int answer;
     boolean shown;
+    MouseListener mouseListener;
     
     public Block(int answer, boolean shown){
         label = new JLabel();
-        this.answer = answer;
-        this.shown = shown;
-        if(!shown){
-        label.addMouseListener(new MouseListener() {
+        mouseListener = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
                 labelMouseClicked(me);
+                
             }
 
             @Override
@@ -38,30 +38,35 @@ public class Block{
             @Override
             public void mouseExited(MouseEvent me) {              
             }            
-
-            
-        });
-        } else
-            label.setText(Integer.toString(answer));
+        };
+        this.answer = answer;
+        this.shown = shown;
         
-        label.setEnabled(true);
-        label.setFont(new java.awt.Font("Tahoma", 0, 36)); 
+        if(!shown){
+            label.setFont(new Font("Tahoma", 0, 36));            
+            label.addMouseListener(mouseListener);
+        } else{
+            label.setText(Integer.toString(answer));
+            label.setFont(new Font("Tahoma", Font.BOLD, 36));
+        } 
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        label.setPreferredSize(new java.awt.Dimension(50, 50));      
-        label.setVisible(true);              
+        label.setPreferredSize(new java.awt.Dimension(50, 50));                   
     }
     
     public void addToPane(int x, int y, Container pane) {
         pane.add(label,new AbsoluteConstraints(x, y, 30, 30));
     }
     
-    public boolean checkAnswer(int value){
-        return value == answer;
+    public boolean checkAnswer(){
+        return label.getText().equals(answer);
     }
     
     public JLabel getLabel(){
         return label;
+    }
+    
+    public int getAnswer(){
+        return answer;
     }
     
     public void labelMouseClicked(MouseEvent evt) {
