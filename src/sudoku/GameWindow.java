@@ -2,12 +2,15 @@ package sudoku;
 
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.DefaultListModel;
 
 public class GameWindow extends javax.swing.JFrame {
     public static GameWindow singleton = null;   // For a single instance
     final static String[] integers = {"1", "2", "3", "4", "5", "6", "7", "8", "9"}; // List for toggling of boxes
     javax.swing.JButton StepButton;
+    MouseListener mouseListener;
     
     int[][] playerChoice; //Answer Key and Players answers   
     Block[][] blocks = new Block[9][9];
@@ -16,10 +19,17 @@ public class GameWindow extends javax.swing.JFrame {
 
     public GameWindow(int[][] SudokuBoxes, boolean[][] BoxesWithValue) {
         explanation = new DefaultListModel();        
-
+        mouseListener = new java.awt.event.MouseAdapter() { // Allow person to click through steps
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    explanation.clear();
+                    ComputerButton.setText("Step by Step");
+                    StepButton.setVisible(false);
+                    StepButton.removeMouseListener(this);
+                    AnswerButton.setVisible(true);                    
+                }
+            };
         // May need to Adjust??????
-        setContentPane(new Paint());     //Create a valid looking Sudoku Puzzle
-        
+        setContentPane(new Paint());     //Create a valid looking Sudoku Puzzle        
         
         initComponents();
         StepButton = new javax.swing.JButton();
@@ -29,7 +39,7 @@ public class GameWindow extends javax.swing.JFrame {
         
         int z = 10;
         for( int i = 0; i < 9; i++){ 
-             int x = 10;
+            int x = 10;
             for( int y = 0; y < 9; y++){
                 blocks[i][y] = new Block(SudokuBoxes[i][y], BoxesWithValue[i][y]);                                           
                 blocks[i][y].addToPane(x, z, getContentPane());
@@ -61,6 +71,7 @@ public class GameWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation((Toolkit.getDefaultToolkit().getScreenSize().width/2 - 225), (Toolkit.getDefaultToolkit().getScreenSize().height/2 - 200));
         setMinimumSize(new java.awt.Dimension(300, 450));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         AnswerButton.setText("Compare Solution");
@@ -116,7 +127,7 @@ public class GameWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_AnswerButtonMouseClicked
 
     private void ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComputerButtonMouseClicked
-        if(ComputerButton.getText().equals("Step by Step")){
+       if(ComputerButton.getText().equals("Step by Step")){
             explanation.addElement("This will erase all your data");
             explanation.addElement("and allow the computer to");
             explanation.addElement("solve this puzzle for you");
@@ -124,15 +135,7 @@ public class GameWindow extends javax.swing.JFrame {
             
             StepButton.setVisible(true);
             StepButton.setText("No");
-            StepButton.addMouseListener(new java.awt.event.MouseAdapter() { // Allow person to click through steps
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    explanation.clear();
-                    ComputerButton.setText("Step by Step");
-                    StepButton.setVisible(false);
-                    StepButton.removeMouseListener(this);
-                    AnswerButton.setVisible(true);                    
-                }
-            });
+            StepButton.addMouseListener(mouseListener);
             
             AnswerButton.setVisible(false);
             
@@ -148,8 +151,9 @@ public class GameWindow extends javax.swing.JFrame {
             }
             explanation.clear();
             ComputerButton.setVisible(false);
+            StepButton.removeMouseListener(mouseListener);
             StepButton.setText("Next Step");
-            SolvingSudoku solSudoku = new SolvingSudoku(blocks);
+            ComputingSudoku comSudoku = new ComputingSudoku(blocks);
                        
         }
     }//GEN-LAST:event_ComputerButtonMouseClicked
@@ -231,12 +235,7 @@ public class GameWindow extends javax.swing.JFrame {
         if (i[0] > 4) {
             StepButton.setVisible(false);
         }
-    }
-    
-    public void addMouseListenerToStepButton(java.awt.event.MouseAdapter mouseAdapter){
-        StepButton.addMouseListener(mouseAdapter);
-        StepButton.setVisible(true);
-    }
+    }        
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
