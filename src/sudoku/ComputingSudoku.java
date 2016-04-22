@@ -34,6 +34,7 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
         values = new ArrayList();
         map = new LinkedHashMap();
         SudokuBoxes = new int[9][9];
+        rand = new Random();
         
         ResetList();
         
@@ -76,25 +77,44 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
     //See if i could randomize box, row, column
     
     public void NextStep(){
-        IdentifyLists();
+        int i = rand.nextInt(4);
+        switch(i){
+            //case 0: 
+               // SingleSize();
+                //break;
+            default: 
+                SingleRow(); //Find the specific text size for explanation
+                break;
+            //case 2: 
+               // SingleColumn();
+                //break;
+            //case 3: 
+                //SingleBox();
+                //break;
+        }   
     }
     
-    public void IdentifyLists(){
+    public void SingleSize(){
         for(int i = 0; i<81; i++){
             if(((ArrayList)map.get(i)).size() == 1){
                 blocks[i/9][i%9].getLabel().setForeground(new Color(0, 255, 0));
                 blocks[i/9][i%9].getLabel().setText(Integer.toString(blocks[i/9][i%9].getAnswer()));
-                GameWindow.singleton.explanation.addElement("This is the value the computer"); GameWindow.singleton.explanation.addElement("found. Look at the surrounding rows,");
-                GameWindow.singleton.explanation.addElement("columns and box to understand"); GameWindow.singleton.explanation.addElement("why. This method determined that this");
-                GameWindow.singleton.explanation.addElement("was the only possible value");  GameWindow.singleton.explanation.addElement("for this square."); GameWindow.singleton.explanation.addElement("");
+                GameWindow.singleton.explanation.addElement("This is the value the"); GameWindow.singleton.explanation.addElement("computer found. Look at the ");
+                GameWindow.singleton.explanation.addElement("surrounding rows, columns and"); GameWindow.singleton.explanation.addElement("box to understand why. This");
+                GameWindow.singleton.explanation.addElement("method determined that this was the");  GameWindow.singleton.explanation.addElement("only possible value for this square."); 
+                GameWindow.singleton.explanation.addElement(""); GameWindow.singleton.explanation.addElement("");
                 removeFromLists(i/9, i%9, SudokuBoxes[i/9][i%9]);
-                System.out.println(map.get((i/9) + i%9));
+                //System.out.println(map.get((i/9) + i%9));
                 return;
             }
         }
-        
+        NextStep();
+    }
+      
+    public void SingleRow(){
         ArrayList compare = new ArrayList();
         ArrayList SqPos = new ArrayList();
+        
         for(int i = 0; i<9; i++){          // i = row, y = column
             for(int y = 0; y<9; y++){
                 if(blocks[i][y].getLabel().getText().equals("")){
@@ -122,10 +142,10 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
                         if(valueHeld[y]){
                             blocks[i][(int)SqPos.get(y)].getLabel().setForeground(new Color(0, 255, 0));
                             blocks[i][(int)SqPos.get(y)].getLabel().setText(Integer.toString(blocks[i][(int)SqPos.get(y)].getAnswer()));
-                            GameWindow.singleton.explanation.addElement("This is the value the computer"); GameWindow.singleton.explanation.addElement("found. Look at the surrounding rows,");
-                            GameWindow.singleton.explanation.addElement("columns and box to understand"); GameWindow.singleton.explanation.addElement("why. This method determined that this");
-                            GameWindow.singleton.explanation.addElement("was the only box int this row");  GameWindow.singleton.explanation.addElement("that could contain this value"); GameWindow.singleton.explanation.addElement("");
-                
+                            GameWindow.singleton.explanation.addElement("This is the value the"); GameWindow.singleton.explanation.addElement("computer found. Look at");
+                            GameWindow.singleton.explanation.addElement("the surrounding rows,"); GameWindow.singleton.explanation.addElement("columns and box to understand");
+                            GameWindow.singleton.explanation.addElement("why. This method determined");  GameWindow.singleton.explanation.addElement("that this was the only"); 
+                            GameWindow.singleton.explanation.addElement("square for this row that could"); GameWindow.singleton.explanation.addElement("contain this value"); GameWindow.singleton.explanation.addElement("");
                             removeFromLists(i, (int)SqPos.get(y), e);
                             return;
                         }
@@ -135,6 +155,12 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
             compare.clear();
             SqPos.clear();
        }
+        NextStep();
+    }
+    
+    public void SingleColumn(){
+         ArrayList compare = new ArrayList();
+        ArrayList SqPos = new ArrayList();
         
         for(int i = 0; i<9; i++){          // i = row, y = column
             for(int y = 0; y<9; y++){
@@ -162,9 +188,10 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
                         if(valueHeld[y]){
                             blocks[(int)SqPos.get(y)][i].getLabel().setForeground(new Color(0, 255, 0));
                             blocks[(int)SqPos.get(y)][i].getLabel().setText(Integer.toString(blocks[(int)SqPos.get(y)][i].getAnswer()));
-                            GameWindow.singleton.explanation.addElement("This is the value the computer"); GameWindow.singleton.explanation.addElement("found. Look at the surrounding rows,");
-                            GameWindow.singleton.explanation.addElement("columns and box to understand"); GameWindow.singleton.explanation.addElement("why. This method determined that this");
-                            GameWindow.singleton.explanation.addElement("was the only box int this column");  GameWindow.singleton.explanation.addElement("that could contain this value"); GameWindow.singleton.explanation.addElement("");
+                            GameWindow.singleton.explanation.addElement("This is the value the"); GameWindow.singleton.explanation.addElement("computer found. Look at the ");
+                            GameWindow.singleton.explanation.addElement("surrounding rows, columns and"); GameWindow.singleton.explanation.addElement("box to understand why. This");
+                            GameWindow.singleton.explanation.addElement("method determined that this was the");  GameWindow.singleton.explanation.addElement("only square for this column"); 
+                            GameWindow.singleton.explanation.addElement("that could contain this value"); GameWindow.singleton.explanation.addElement("");
                 
                             removeFromLists((int)SqPos.get(y), i, e);
                             return;
@@ -174,7 +201,13 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
             }
             compare.clear();
             SqPos.clear();
-       }
+       } 
+        NextStep();
+    }
+    
+    public void SingleBox(){
+        ArrayList compare = new ArrayList();
+        ArrayList SqPos = new ArrayList();
         
         for(int a = 0; a < 9; a+=3){
             for(int b= 0; b < 9; b+=3){
@@ -204,9 +237,10 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
                                 if(valueHeld[y]){
                                     blocks[(int)SqPos.get(y)/9][(int)SqPos.get(y)%9].getLabel().setForeground(new Color(0, 255, 0));
                                     blocks[(int)SqPos.get(y)/9][(int)SqPos.get(y)%9].getLabel().setText(Integer.toString(blocks[(int)SqPos.get(y)/9][(int)SqPos.get(y)%9].getAnswer()));
-                                    GameWindow.singleton.explanation.addElement("This is the value the computer"); GameWindow.singleton.explanation.addElement("found. Look at the surrounding rows,");
-                                    GameWindow.singleton.explanation.addElement("columns and box to understand"); GameWindow.singleton.explanation.addElement("why. This method determined that this");
-                                    GameWindow.singleton.explanation.addElement("was the only box int this column");  GameWindow.singleton.explanation.addElement("that could contain this value"); GameWindow.singleton.explanation.addElement("");
+                                    GameWindow.singleton.explanation.addElement("This is the value the"); GameWindow.singleton.explanation.addElement("computer found. Look at the ");
+                            GameWindow.singleton.explanation.addElement("surrounding rows, columns and"); GameWindow.singleton.explanation.addElement("box to understand why. This");
+                            GameWindow.singleton.explanation.addElement("method determined that this was the");  GameWindow.singleton.explanation.addElement("only square for this box"); 
+                            GameWindow.singleton.explanation.addElement("that could contain this value"); GameWindow.singleton.explanation.addElement("");
                 
                                     removeFromLists((int)SqPos.get(y)/9, (int)SqPos.get(y)%9, e);
                                     return;
@@ -218,7 +252,8 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
                     SqPos.clear();
                 }    
             }
-        }    
+        }
+        NextStep();
     }
     
     public void ConfigureShownBoxes(int difficulty){
