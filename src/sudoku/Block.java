@@ -1,6 +1,7 @@
 
 package sudoku;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
@@ -41,7 +42,7 @@ public class Block{
         };
         this.answer = answer;
         this.shown = shown;
-        
+        label.setForeground(new Color(0, 0, 0));
         if(!shown){
             label.setFont(new Font("Tahoma", 0, 36));            
             label.addMouseListener(mouseListener);

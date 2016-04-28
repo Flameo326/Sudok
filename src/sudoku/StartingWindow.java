@@ -31,8 +31,10 @@ public class StartingWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation((Toolkit.getDefaultToolkit().getScreenSize().width/2 - 80), (Toolkit.getDefaultToolkit().getScreenSize().height/2 - 50));
+        setMinimumSize(new java.awt.Dimension(190, 120));
+        setPreferredSize(new java.awt.Dimension(190, 145));
         setResizable(false);
-        setSize(new java.awt.Dimension(180, 110));
+        setSize(new java.awt.Dimension(190, 120));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DifficultyButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));

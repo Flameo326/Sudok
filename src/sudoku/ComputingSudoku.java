@@ -21,13 +21,14 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
         BoxesWithValue = new boolean[9][9];
         map = new LinkedHashMap<>();
         rand = new Random();
-                       
+                      
         ResetList();
         ConfigureShownBoxes(difficulty);
         MakeAnswerKey();
     }
     
     Block[][] blocks;
+    ArrayList saves;
     
     public ComputingSudoku(Block[][] blocks){
         this.blocks = blocks;
@@ -35,18 +36,9 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
         map = new LinkedHashMap();
         SudokuBoxes = new int[9][9];
         rand = new Random();
+        saves = new ArrayList();
         
-        ResetList();
-        
-        for (int i = 0; i < 9; i++) {
-            for (int y = 0; y < 9; y++) {  
-                if(!(blocks[i][y].getLabel().getText().equals(""))){ 
-                    SudokuBoxes[i][y] = Integer.valueOf(blocks[i][y].getLabel().getText());
-                } else{
-                    SudokuBoxes[i][y] = 0;
-                }                
-            }
-        }
+        ResetList();                
         
         for(int i = 0; i < 81; i++){
             map.put(i, (ArrayList)values.clone());             
@@ -54,9 +46,8 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
         
         for (int i = 0; i < 9; i++) {
             for (int y = 0; y < 9; y++) {
-                if(!(SudokuBoxes[i][y] == 0))
-                    removeFromLists(i, y, SudokuBoxes[i][y]);
-                System.out.println(map.get((i*9) + y));
+                if(!(blocks[i][y].getLabel().getText().equals("")))
+                    removeFromLists(i, y, blocks[i][y].getAnswer());                
             }
         }
         
@@ -71,56 +62,97 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
                 }
             });
     }
-    //Find a way to limit columns on exlanation
-    //Change colored text back to normal
-    //Fix first setting
-    //See if i could randomize box, row, column
     
     public void NextStep(){
+        changeColor();
+        checkBlocks();
+        
         int i = rand.nextInt(4);
-        switch(i){
-            //case 0: 
-               // SingleSize();
-                //break;
-            default: 
-                SingleRow(); //Find the specific text size for explanation
-                break;
-            //case 2: 
-               // SingleColumn();
-                //break;
-            //case 3: 
-                //SingleBox();
-                //break;
-        }   
+        int y = i;
+        boolean temp = true;
+        do{
+            
+            switch(i){
+                case 0: 
+                    temp = SingleSize();
+                    break;
+                case 1: 
+                    temp= SingleRow(); //Find the specific text size for explanation
+                    break;
+                case 2: 
+                    temp = SingleColumn();
+                    break;
+                case 3: 
+                    temp = SingleBox();
+                    break;
+            } 
+            i++;
+            if(i > 3)
+                i = 0;
+            if(y == i)
+                guess();
+        } while(temp);
+        
+        for(int e = 0; e < 9; e++){
+            for(int p = 0; p < 9; p++){
+                System.out.println(e*9 + p + " " + map.get(e*9 + p));
+            }
+        }
+        System.out.println();
     }
     
-    public void SingleSize(){
+    public void checkBlocks(){
+        for(int i = 0; i < 9; i++){
+            for(int y = 0; y < 9; y++){
+                if(!blocks[i][y].getLabel().getText().equals("")){
+                    return;
+                }               
+            }
+        }
+        GameWindow.singleton.StepButton.setVisible(false); 
+    }
+    
+    public void changeColor(){
+        Color color = new Color(0 ,0 ,0);
+        
+        for(int i = 0; i < 9; i++){
+            for(int y = 0; y < 9; y++){
+                blocks[i][y].getLabel().setForeground(color);
+            }
+        }
+    }
+    
+    public boolean SingleSize(){
         for(int i = 0; i<81; i++){
             if(((ArrayList)map.get(i)).size() == 1){
                 blocks[i/9][i%9].getLabel().setForeground(new Color(0, 255, 0));
-                blocks[i/9][i%9].getLabel().setText(Integer.toString(blocks[i/9][i%9].getAnswer()));
-                GameWindow.singleton.explanation.addElement("This is the value the"); GameWindow.singleton.explanation.addElement("computer found. Look at the ");
-                GameWindow.singleton.explanation.addElement("surrounding rows, columns and"); GameWindow.singleton.explanation.addElement("box to understand why. This");
-                GameWindow.singleton.explanation.addElement("method determined that this was the");  GameWindow.singleton.explanation.addElement("only possible value for this square."); 
-                GameWindow.singleton.explanation.addElement(""); GameWindow.singleton.explanation.addElement("");
-                removeFromLists(i/9, i%9, SudokuBoxes[i/9][i%9]);
-                //System.out.println(map.get((i/9) + i%9));
-                return;
+                blocks[i/9][i%9].getLabel().setText(Integer.toString((int)(map.get(i)).get(0)));
+                GameWindow.singleton.explanation.addElement(""); GameWindow.singleton.explanation.addElement(""); 
+                GameWindow.singleton.explanation.addElement("This is the value the"); GameWindow.singleton.explanation.addElement("computer found. Look at");
+                GameWindow.singleton.explanation.addElement("the surrounding rows,"); GameWindow.singleton.explanation.addElement("columns and box to");
+                GameWindow.singleton.explanation.addElement("understand why. This");  GameWindow.singleton.explanation.addElement("method determined that"); 
+                GameWindow.singleton.explanation.addElement("this was the only"); GameWindow.singleton.explanation.addElement("possible value for this");  GameWindow.singleton.explanation.addElement("square.");
+                removeFromLists(i/9, i%9, (int)(map.get(i)).get(0));
+                return false;
             }
         }
-        NextStep();
+        return true;
     }
       
-    public void SingleRow(){
+    public boolean SingleRow(){
         ArrayList compare = new ArrayList();
         ArrayList SqPos = new ArrayList();
         
         for(int i = 0; i<9; i++){          // i = row, y = column
             for(int y = 0; y<9; y++){
                 if(blocks[i][y].getLabel().getText().equals("")){
-                    compare.add(map.get((i*9) + y));
-                    System.out.println(map.get((i*9) + y));
-                    SqPos.add(y);  
+                    if(map.get((i*9) + y).isEmpty()){
+                        redo();
+                        return false;
+                    }else{                       
+                    compare.add(map.get((i*9) + y));                    
+                    SqPos.add(y); 
+                    }
                 }
             }
             for(int e = 1; e <= 9; e++){
@@ -141,13 +173,14 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
                     for(int y = 0; y < compare.size(); y++){
                         if(valueHeld[y]){
                             blocks[i][(int)SqPos.get(y)].getLabel().setForeground(new Color(0, 255, 0));
-                            blocks[i][(int)SqPos.get(y)].getLabel().setText(Integer.toString(blocks[i][(int)SqPos.get(y)].getAnswer()));
+                            blocks[i][(int)SqPos.get(y)].getLabel().setText(Integer.toString(e));
+                            GameWindow.singleton.explanation.addElement(""); GameWindow.singleton.explanation.addElement(""); 
                             GameWindow.singleton.explanation.addElement("This is the value the"); GameWindow.singleton.explanation.addElement("computer found. Look at");
-                            GameWindow.singleton.explanation.addElement("the surrounding rows,"); GameWindow.singleton.explanation.addElement("columns and box to understand");
-                            GameWindow.singleton.explanation.addElement("why. This method determined");  GameWindow.singleton.explanation.addElement("that this was the only"); 
-                            GameWindow.singleton.explanation.addElement("square for this row that could"); GameWindow.singleton.explanation.addElement("contain this value"); GameWindow.singleton.explanation.addElement("");
+                            GameWindow.singleton.explanation.addElement("the surrounding rows,"); GameWindow.singleton.explanation.addElement("columns and box to");
+                            GameWindow.singleton.explanation.addElement("understand why. This");  GameWindow.singleton.explanation.addElement("method determined that"); 
+                            GameWindow.singleton.explanation.addElement("this was the only square"); GameWindow.singleton.explanation.addElement("for this row that could"); GameWindow.singleton.explanation.addElement("contain this value.");
                             removeFromLists(i, (int)SqPos.get(y), e);
-                            return;
+                            return false;
                         }
                     }               
                 }
@@ -155,18 +188,23 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
             compare.clear();
             SqPos.clear();
        }
-        NextStep();
+        return true;
     }
     
-    public void SingleColumn(){
-         ArrayList compare = new ArrayList();
+    public boolean SingleColumn(){
+        ArrayList compare = new ArrayList();
         ArrayList SqPos = new ArrayList();
         
         for(int i = 0; i<9; i++){          // i = row, y = column
             for(int y = 0; y<9; y++){
                 if(blocks[y][i].getLabel().getText().equals("")){
-                    compare.add(map.get((y*9) + i));
-                    SqPos.add(y);  
+                    if(map.get((y*9) + i).isEmpty()){
+                        redo();
+                        return false;
+                    }else{ 
+                        compare.add(map.get((y*9) + i));
+                        SqPos.add(y);
+                    }
                 }
             }
             for(int e = 1; e <= 9; e++){
@@ -187,14 +225,14 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
                     for(int y = 0; y < compare.size(); y++){
                         if(valueHeld[y]){
                             blocks[(int)SqPos.get(y)][i].getLabel().setForeground(new Color(0, 255, 0));
-                            blocks[(int)SqPos.get(y)][i].getLabel().setText(Integer.toString(blocks[(int)SqPos.get(y)][i].getAnswer()));
-                            GameWindow.singleton.explanation.addElement("This is the value the"); GameWindow.singleton.explanation.addElement("computer found. Look at the ");
-                            GameWindow.singleton.explanation.addElement("surrounding rows, columns and"); GameWindow.singleton.explanation.addElement("box to understand why. This");
-                            GameWindow.singleton.explanation.addElement("method determined that this was the");  GameWindow.singleton.explanation.addElement("only square for this column"); 
-                            GameWindow.singleton.explanation.addElement("that could contain this value"); GameWindow.singleton.explanation.addElement("");
-                
+                            blocks[(int)SqPos.get(y)][i].getLabel().setText(Integer.toString(e));
+                            GameWindow.singleton.explanation.addElement(""); GameWindow.singleton.explanation.addElement(""); 
+                            GameWindow.singleton.explanation.addElement("This is the value the"); GameWindow.singleton.explanation.addElement("computer found. Look at");
+                            GameWindow.singleton.explanation.addElement("the surrounding rows,"); GameWindow.singleton.explanation.addElement("columns and box to");
+                            GameWindow.singleton.explanation.addElement("understand why. This");  GameWindow.singleton.explanation.addElement("method determined that"); 
+                           GameWindow.singleton.explanation.addElement("this was the only square"); GameWindow.singleton.explanation.addElement("for this column that could"); GameWindow.singleton.explanation.addElement("contain this value.");
                             removeFromLists((int)SqPos.get(y), i, e);
-                            return;
+                            return false;
                         }
                     }               
                 }
@@ -202,10 +240,10 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
             compare.clear();
             SqPos.clear();
        } 
-        NextStep();
+        return true;
     }
     
-    public void SingleBox(){
+    public boolean SingleBox(){
         ArrayList compare = new ArrayList();
         ArrayList SqPos = new ArrayList();
         
@@ -214,10 +252,16 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
                 for(int i = a; i<a+3; i++){          // i = row, y = column
                     for(int y = b; y<b+3; y++){
                         if(blocks[i][y].getLabel().getText().equals("")){
-                            compare.add(map.get((i*9) + y));
-                            SqPos.add((i*9) + y);  
+                            if(map.get((i*9) + y).isEmpty()){
+                                redo();
+                                return false;
+                            }else{ 
+                                compare.add(map.get((i*9) + y));
+                                SqPos.add((i*9) + y);  
+                            }
                         }
                     }
+                }
                     for(int e = 1; e <= 9; e++){
                         int f = 0;
                         boolean[] valueHeld = new boolean[9];
@@ -236,25 +280,94 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
                             for(int y = 0; y < compare.size(); y++){
                                 if(valueHeld[y]){
                                     blocks[(int)SqPos.get(y)/9][(int)SqPos.get(y)%9].getLabel().setForeground(new Color(0, 255, 0));
-                                    blocks[(int)SqPos.get(y)/9][(int)SqPos.get(y)%9].getLabel().setText(Integer.toString(blocks[(int)SqPos.get(y)/9][(int)SqPos.get(y)%9].getAnswer()));
-                                    GameWindow.singleton.explanation.addElement("This is the value the"); GameWindow.singleton.explanation.addElement("computer found. Look at the ");
-                            GameWindow.singleton.explanation.addElement("surrounding rows, columns and"); GameWindow.singleton.explanation.addElement("box to understand why. This");
-                            GameWindow.singleton.explanation.addElement("method determined that this was the");  GameWindow.singleton.explanation.addElement("only square for this box"); 
-                            GameWindow.singleton.explanation.addElement("that could contain this value"); GameWindow.singleton.explanation.addElement("");
-                
+                                    blocks[(int)SqPos.get(y)/9][(int)SqPos.get(y)%9].getLabel().setText(Integer.toString(e));
+                                    GameWindow.singleton.explanation.addElement(""); GameWindow.singleton.explanation.addElement(""); 
+                                    GameWindow.singleton.explanation.addElement("This is the value the"); GameWindow.singleton.explanation.addElement("computer found. Look at");
+                                    GameWindow.singleton.explanation.addElement("the surrounding rows,"); GameWindow.singleton.explanation.addElement("columns and box to");
+                                    GameWindow.singleton.explanation.addElement("understand why. This");  GameWindow.singleton.explanation.addElement("method determined that"); 
+                                    GameWindow.singleton.explanation.addElement("this was the only square"); GameWindow.singleton.explanation.addElement("for this box that could"); GameWindow.singleton.explanation.addElement("contain this value.");
                                     removeFromLists((int)SqPos.get(y)/9, (int)SqPos.get(y)%9, e);
-                                    return;
+                                    return false;
                                 }
                             }               
                         }
                     }
                     compare.clear();
                     SqPos.clear();
-                }    
+                    
             }
         }
-        NextStep();
+        return true;
     }
+    
+    public void guess(){       
+        for(int i = 0; i < 9; i++){
+            for(int y = 0; y < 9; y++){
+                if(!(blocks[i][y].getLabel().getText().equals("")))
+                    SudokuBoxes[i][y] = Integer.valueOf(blocks[i][y].getLabel().getText());
+                else
+                    SudokuBoxes[i][y] = 0;
+            }
+        }    
+        
+        int x = rand.nextInt(81);
+        do{       
+        if(!map.get(x/9 + x%9).isEmpty()){
+            saves.add(0); saves.add(x); saves.add(SudokuBoxes);
+            blocks[x/9][x%9].getLabel().setForeground(new Color(0, 255, 0));
+            blocks[x/9][x%9].getLabel().setText((String)(map.get(x/9 + x%9).get(0)));
+            blocks[x/9][x%9].shown = true;
+            // Explanation
+            removeFromLists(x/9, x%9, Integer.valueOf(blocks[x/9][x%9].getLabel().getText()));
+            break;
+        } else
+            x++;
+        } while(true);       
+    }
+    
+    public void redo(){
+        int temp = (int)saves.get(saves.size()-3); temp++;
+        if(temp < ((ArrayList)saves.get(saves.size()-3)).size()){
+            saves.remove(saves.size()-3); saves.add(saves.size()-2, temp);
+        } else{
+            for(int i = 0; i < 3; i++){
+                saves.remove(saves.size()-1);
+                redo();
+                return;
+            }
+        }
+        
+        SudokuBoxes = (int[][])saves.get(saves.size()-1);
+        for(int i = 0; i < 9; i++){
+            for(int y = 0; y < 9; y++){
+                if(!(SudokuBoxes[i][y] == 0))
+                    blocks[i][y].getLabel().setText(Integer.toString(SudokuBoxes[i][y]));
+                else
+                    blocks[i][y].getLabel().setText("");
+            }
+        }                 
+        
+        for(int i = 0; i < 81; i++){
+            map.put(i, (ArrayList)values.clone());             
+        }        
+        
+        for (int i = 0; i < 9; i++) {
+            for (int y = 0; y < 9; y++) {
+                if(!(blocks[i][y].getLabel().getText().equals("")))
+                    removeFromLists(i, y, blocks[i][y].getAnswer());                
+            }
+        }
+        blocks[(int)(saves.get(saves.size()-2)) / 9][(int)(saves.get(saves.size()-2)) % 9].getLabel().setForeground(new Color(0, 0, 0));
+        blocks[(int)(saves.get(saves.size()-2)) / 9][(int)(saves.get(saves.size()-2)) % 9].getLabel().setText((String)(map.get((int)(saves.get(saves.size()-2)) / 9 + (int)(saves.get(saves.size()-2)) % 9).get((int)saves.get(temp))));
+        // Explanation
+        removeFromLists((int)(saves.get(saves.size()-2))/9, (int)(saves.get(saves.size()-2))%9, Integer.valueOf(blocks[(int)(saves.get(saves.size()-2))/9][(int)(saves.get(saves.size()-2))%9].getLabel().getText()));
+    }
+    
+    // All i need to do now is test out guessing function and fint tune it. See if it works
+    // Always possibility to make better design and selecting boxes, assisting the player.
+    // Do the explanations
+    // See if it works at school
+    // Find a way to present this earlier? Make it a teaching oppurtunity? Who knows????
     
     public void ConfigureShownBoxes(int difficulty){
         int TotalBoxes = rand.nextInt(5) + (32-(4*difficulty));

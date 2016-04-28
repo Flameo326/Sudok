@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.DefaultListModel;
+import static javax.swing.JList.VERTICAL;
 
 public class GameWindow extends javax.swing.JFrame {
     public static GameWindow singleton = null;   // For a single instance
@@ -47,7 +48,7 @@ public class GameWindow extends javax.swing.JFrame {
             }
             z += 40;
         }       
-
+        jList1.setLayoutOrientation(VERTICAL);
         jList1.setModel(explanation);  //Set up side for Explanations
         jList1.setVisibleRowCount(21);  // For explanation of help menu
 
@@ -100,8 +101,8 @@ public class GameWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void AnswerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnswerButtonMouseClicked
-        boolean match = true, correct = true;
         if (AnswerButton.getText().equals("Compare Solution")) {
+            boolean match = true, correct = true;
             for (int i = 0; i < 9; i++) {
                 for (int y = 0; y < 9; y++) {                    
                     if(!(blocks[i][y].getLabel().getText().equals(""))){                        
@@ -157,7 +158,7 @@ public class GameWindow extends javax.swing.JFrame {
                        
         }
     }//GEN-LAST:event_ComputerButtonMouseClicked
-
+ 
     private boolean compare(int row, int column, int value, boolean correct) {        
         for (int i = 0; i < 9; i++) {
             if (i != column && playerChoice[row][i] == value) {
