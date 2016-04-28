@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import static javax.swing.JList.VERTICAL;
 
 public class GameWindow extends javax.swing.JFrame {
@@ -47,7 +48,7 @@ public class GameWindow extends javax.swing.JFrame {
                 x += 30;                
             }
             z += 40;
-        }       
+        }        
         jList1.setLayoutOrientation(VERTICAL);
         jList1.setModel(explanation);  //Set up side for Explanations
         jList1.setVisibleRowCount(21);  // For explanation of help menu
@@ -236,7 +237,11 @@ public class GameWindow extends javax.swing.JFrame {
         if (i[0] > 4) {
             StepButton.setVisible(false);
         }
-    }        
+    } 
+    
+    public JList getjList(){
+        return jList1;
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

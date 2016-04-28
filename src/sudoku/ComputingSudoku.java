@@ -65,7 +65,8 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
     
     public void NextStep(){
         changeColor();
-        checkBlocks();
+        if(checkBlocks())
+            return;
         
         int i = rand.nextInt(4);
         int y = i;
@@ -89,27 +90,26 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
             i++;
             if(i > 3)
                 i = 0;
-            if(y == i)
+            if(y == i){
                 guess();
-        } while(temp);
-        
-        for(int e = 0; e < 9; e++){
-            for(int p = 0; p < 9; p++){
-                System.out.println(e*9 + p + " " + map.get(e*9 + p));
+                temp = false;
             }
-        }
-        System.out.println();
+        } while(temp);
+        GameWindow.singleton.getjList().ensureIndexIsVisible(GameWindow.singleton.getjList().getModel().getSize() - 1);
     }
     
-    public void checkBlocks(){
+    public boolean checkBlocks(){
         for(int i = 0; i < 9; i++){
             for(int y = 0; y < 9; y++){
-                if(!blocks[i][y].getLabel().getText().equals("")){
-                    return;
+                if(blocks[i][y].getLabel().getText().equals("")){
+                    return false;
                 }               
             }
         }
         GameWindow.singleton.StepButton.setVisible(false); 
+        GameWindow.singleton.explanation.addElement(""); GameWindow.singleton.explanation.addElement(""); GameWindow.singleton.explanation.addElement("");
+        GameWindow.singleton.explanation.addElement("Puzzle Finished!");
+        return true;
     }
     
     public void changeColor(){
@@ -312,31 +312,35 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
         
         int x = rand.nextInt(81);
         do{       
-        if(!map.get(x/9 + x%9).isEmpty()){
-            saves.add(0); saves.add(x); saves.add(SudokuBoxes);
+        if(!map.get(x).isEmpty()){
+            saves.add(0); saves.add(map.get(x).clone()); saves.add(x); saves.add(SudokuBoxes);
+            changeColor();
             blocks[x/9][x%9].getLabel().setForeground(new Color(0, 255, 0));
-            blocks[x/9][x%9].getLabel().setText((String)(map.get(x/9 + x%9).get(0)));
-            blocks[x/9][x%9].shown = true;
+            blocks[x/9][x%9].getLabel().setText(Integer.toString((int)((ArrayList)(map.get(x))).get(0)));           
             // Explanation
             removeFromLists(x/9, x%9, Integer.valueOf(blocks[x/9][x%9].getLabel().getText()));
             break;
-        } else
+        } else{
             x++;
+            if(x > 80)
+                x = 0;
+        }
         } while(true);       
     }
     
     public void redo(){
-        int temp = (int)saves.get(saves.size()-3); temp++;
-        if(temp < ((ArrayList)saves.get(saves.size()-3)).size()){
-            saves.remove(saves.size()-3); saves.add(saves.size()-2, temp);
+        int temp = (int)saves.get(saves.size()-4); temp++;
+        if(temp < ((ArrayList)(saves.get(saves.size()-3))).size()){
+            saves.remove(saves.size()-4); saves.add(saves.size()-3, temp);
         } else{
-            for(int i = 0; i < 3; i++){
-                saves.remove(saves.size()-1);
-                redo();
-                return;
+            for(int i = 0; i < 4; i++){
+                saves.remove(saves.size()-1);                                
             }
+            redo();
+            return;
         }
         
+        changeColor();
         SudokuBoxes = (int[][])saves.get(saves.size()-1);
         for(int i = 0; i < 9; i++){
             for(int y = 0; y < 9; y++){
@@ -353,14 +357,15 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
         
         for (int i = 0; i < 9; i++) {
             for (int y = 0; y < 9; y++) {
-                if(!(blocks[i][y].getLabel().getText().equals("")))
-                    removeFromLists(i, y, blocks[i][y].getAnswer());                
+                if(!(SudokuBoxes[i][y] == 0))
+                    removeFromLists(i, y, SudokuBoxes[i][y]);                
             }
         }
-        blocks[(int)(saves.get(saves.size()-2)) / 9][(int)(saves.get(saves.size()-2)) % 9].getLabel().setForeground(new Color(0, 0, 0));
-        blocks[(int)(saves.get(saves.size()-2)) / 9][(int)(saves.get(saves.size()-2)) % 9].getLabel().setText((String)(map.get((int)(saves.get(saves.size()-2)) / 9 + (int)(saves.get(saves.size()-2)) % 9).get((int)saves.get(temp))));
+        blocks[(int)(saves.get(saves.size()-2)) / 9][(int)(saves.get(saves.size()-2)) % 9].getLabel().setForeground(new Color(0, 255, 0));
+        blocks[(int)(saves.get(saves.size()-2)) / 9][(int)(saves.get(saves.size()-2)) % 9].getLabel().setText(Integer.toString((int)(((ArrayList)(saves.get(saves.size()-3))).get(temp))));
         // Explanation
         removeFromLists((int)(saves.get(saves.size()-2))/9, (int)(saves.get(saves.size()-2))%9, Integer.valueOf(blocks[(int)(saves.get(saves.size()-2))/9][(int)(saves.get(saves.size()-2))%9].getLabel().getText()));
+        return;
     }
     
     // All i need to do now is test out guessing function and fint tune it. See if it works
