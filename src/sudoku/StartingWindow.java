@@ -15,7 +15,6 @@ public class StartingWindow extends javax.swing.JFrame {
         difficulty[4] = "Impossible";
         
         initComponents();
-        this.
         DifficultyButton.setText(difficulty[i]);
     }
     

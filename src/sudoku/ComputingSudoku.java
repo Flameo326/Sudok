@@ -109,6 +109,9 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
         GameWindow.singleton.StepButton.setVisible(false); 
         GameWindow.singleton.explanation.addElement(""); GameWindow.singleton.explanation.addElement(""); GameWindow.singleton.explanation.addElement("");
         GameWindow.singleton.explanation.addElement("Puzzle Finished!");
+        GameWindow.singleton.explanation.addElement("Do you want to start ");
+        GameWindow.singleton.explanation.addElement("over again?");
+        GameWindow.singleton.returnToMenu();
         return true;
     }
     
@@ -368,10 +371,8 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
         return;
     }
     
-    // All i need to do now is test out guessing function and fint tune it. See if it works
     // Always possibility to make better design and selecting boxes, assisting the player.
     // Do the explanations
-    // See if it works at school
     // Find a way to present this earlier? Make it a teaching oppurtunity? Who knows????
     
     public void ConfigureShownBoxes(int difficulty){

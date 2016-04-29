@@ -117,6 +117,7 @@ public class GameWindow extends javax.swing.JFrame {
             }
             CheckAnswer(match, correct);
             AnswerButton.setText("Continue?");
+            
         } else {
             explanation.clear();
             for (int i = 0; i < 9; i++) {
@@ -128,6 +129,24 @@ public class GameWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AnswerButtonMouseClicked
 
+    private void resetButton(){
+        javax.swing.JButton resetButton = new javax.swing.JButton();
+        resetButton.setText("Reset Puzzle");
+        resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+               for(int i = 0; i < 9; i++){
+                   for(int y = 0; y < 9; y++){
+                       if(!(blocks[i][y].shown))
+                           blocks[i][y].getLabel().setText("");
+                   }
+               }
+            }
+        });
+        resetButton.setVisible(true);
+        this.getContentPane().add(resetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, -1, -1));
+        this.pack();    
+    }   
+    
     private void ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComputerButtonMouseClicked
        if(ComputerButton.getText().equals("Step by Step")){
             explanation.addElement("This will erase all your data");
@@ -193,19 +212,48 @@ public class GameWindow extends javax.swing.JFrame {
         if (match) {
             explanation.addElement("That is the correct answer!");
             explanation.addElement("Good Job!");
+            explanation.addElement("");            
+            explanation.addElement("Do you want to start ");
+            explanation.addElement("over again?");
+            returnToMenu();
         } else if (correct) {
             explanation.addElement("This isn't the pattern the");
             explanation.addElement("machine came up with but");
             explanation.addElement("it works! Good Job!");
+            explanation.addElement("");
+            explanation.addElement("Do you want to start ");
+            explanation.addElement("over again?");
+            returnToMenu();
         } else {
             explanation.addElement("Aww, Too bad. That isn't");
             explanation.addElement("the correct answer. Try");
             explanation.addElement("again!");
+            explanation.addElement("");
+            explanation.addElement("Do you want to try");
+            explanation.addElement("another puzzle?");
+            returnToMenu();
         }
     }
 
     private void ChangeToWrong(int i, int y) {
         blocks[i][y].getLabel().setForeground(new Color(255, 0, 0));
+    }
+    
+    public void returnToMenu(){ 
+        jList1.ensureIndexIsVisible(explanation.getSize() - 1);
+        javax.swing.JButton returnButton = new javax.swing.JButton();
+        returnButton.setText("Play Again?");
+        returnButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                StartingWindow stWin = new StartingWindow();
+                stWin.setVisible(true);                
+                GameWindow.singleton.dispose();
+                GameWindow.singleton = null;
+            }
+        });
+        returnButton.setVisible(true);
+        this.getContentPane().add(returnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, -1, -1));
+        this.pack();    
     }
 
     //Actions to preform when called from HelpMenu
