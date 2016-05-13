@@ -27,13 +27,15 @@ public class GameWindow extends javax.swing.JFrame {
                     ComputerButton.setText("Step by Step");
                     StepButton.setVisible(false);
                     StepButton.removeMouseListener(this);
-                    AnswerButton.setVisible(true);                    
+                    AnswerButton.setVisible(true);
+                    AnswerButton.setText("Compare Solution");
                 }
             };
         // May need to Adjust??????
         setContentPane(new Paint());     //Create a valid looking Sudoku Puzzle        
         
         initComponents();
+        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width/2 - 150), (Toolkit.getDefaultToolkit().getScreenSize().height/2 - 225));
         StepButton = new javax.swing.JButton();
         StepButton.setText("Next Step");
         getContentPane().add(StepButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, -1, -1));
@@ -71,7 +73,7 @@ public class GameWindow extends javax.swing.JFrame {
         jList1 = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width/2 - 225), (Toolkit.getDefaultToolkit().getScreenSize().height/2 - 200));
+        setTitle("Sudoku");
         setMinimumSize(new java.awt.Dimension(300, 450));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -115,11 +117,14 @@ public class GameWindow extends javax.swing.JFrame {
                         correct = false;
                 }               
             }
+            resetButton();
             CheckAnswer(match, correct);
             AnswerButton.setText("Continue?");
             
         } else {
             explanation.clear();
+            returnButton.setVisible(false);
+            resetButton.setVisible(false);
             for (int i = 0; i < 9; i++) {
                 for (int y = 0; y < 9; y++) {
                     blocks[i][y].getLabel().setForeground(new Color(0, 0, 0));
@@ -128,27 +133,39 @@ public class GameWindow extends javax.swing.JFrame {
             AnswerButton.setText("Compare Solution");
         }
     }//GEN-LAST:event_AnswerButtonMouseClicked
-
-    private void resetButton(){
-        javax.swing.JButton resetButton = new javax.swing.JButton();
-        resetButton.setText("Reset Puzzle");
+    
+    public void resetButton(){
+        resetButton = new javax.swing.JButton();
+        resetButton.setText("Reset");
         resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-               for(int i = 0; i < 9; i++){
+                for(int i = 0; i < 9; i++){
                    for(int y = 0; y < 9; y++){
+                       blocks[i][y].getLabel().setForeground(new Color(0, 0, 0));
                        if(!(blocks[i][y].shown))
                            blocks[i][y].getLabel().setText("");
-                   }
-               }
+                   }                  
+                }
+                explanation.clear();
+                returnButton.setVisible(false);
+                resetButton.setVisible(false);
+                AnswerButton.setVisible(true);
+                AnswerButton.setText("Compare Solution");
+                ComputerButton.setVisible(true);
+                ComputerButton.setText("Step by Step");
             }
         });
         resetButton.setVisible(true);
-        this.getContentPane().add(resetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, -1, -1));
+        this.getContentPane().add(resetButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 370, -1, -1));
         this.pack();    
     }   
     
     private void ComputerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComputerButtonMouseClicked
        if(ComputerButton.getText().equals("Step by Step")){
+           if (!(AnswerButton.getText().equals("Compare Solution"))) {
+               returnButton.setVisible(false);
+               resetButton.setVisible(false);
+           }
             explanation.addElement("This will erase all your data");
             explanation.addElement("and allow the computer to");
             explanation.addElement("solve this puzzle for you");
@@ -241,7 +258,7 @@ public class GameWindow extends javax.swing.JFrame {
     
     public void returnToMenu(){ 
         jList1.ensureIndexIsVisible(explanation.getSize() - 1);
-        javax.swing.JButton returnButton = new javax.swing.JButton();
+        returnButton = new javax.swing.JButton();
         returnButton.setText("Play Again?");
         returnButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -322,7 +339,8 @@ public class GameWindow extends javax.swing.JFrame {
             }
         });
     }
-
+    private javax.swing.JButton resetButton;
+    private javax.swing.JButton returnButton;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AnswerButton;
     private javax.swing.JButton ComputerButton;

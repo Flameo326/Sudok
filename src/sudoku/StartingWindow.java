@@ -14,6 +14,7 @@ public class StartingWindow extends javax.swing.JFrame {
         difficulty[3] = "Extreme";
         difficulty[4] = "Impossible";
         
+        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width/2 - 80), (Toolkit.getDefaultToolkit().getScreenSize().height/2 - 50));
         initComponents();
         DifficultyButton.setText(difficulty[i]);
     }
@@ -29,11 +30,10 @@ public class StartingWindow extends javax.swing.JFrame {
         PlayButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width/2 - 80), (Toolkit.getDefaultToolkit().getScreenSize().height/2 - 50));
+        setTitle("Sudoku");
         setMinimumSize(new java.awt.Dimension(190, 120));
         setPreferredSize(new java.awt.Dimension(190, 145));
         setResizable(false);
-        setSize(new java.awt.Dimension(190, 120));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DifficultyButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));

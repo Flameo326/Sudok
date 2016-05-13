@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 public class HelpWindow extends javax.swing.JFrame {
 
     public HelpWindow() {
+        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width/2 - 280), (Toolkit.getDefaultToolkit().getScreenSize().height/2 - 135));
         initComponents();
         ImageIcon UnsizedImg = new ImageIcon(getClass().getResource("/sudoku/ImagePAth/SudokuPic.png"));
         //Resize image and add it to Window
@@ -34,7 +35,7 @@ public class HelpWindow extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width/2 - 240), (Toolkit.getDefaultToolkit().getScreenSize().height/2 - 120));
+        setTitle("Sudoku");
         setMinimumSize(new java.awt.Dimension(560, 270));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
