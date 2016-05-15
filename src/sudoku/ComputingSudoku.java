@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Random;
 
 public class ComputingSudoku { // Will create Sudoku puzzle randomly
@@ -91,7 +92,7 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
             i++;
             if(i > 3)
                 i = 0;
-            if(y == i){
+            if(y == i && temp){
                 guess();
                 temp = false;
             }
@@ -305,31 +306,33 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
         return true;
     }
     
-    public void guess(){       
+    public void guess(){ 
+        int[][] tempBoxes = new int[9][9];
         for(int i = 0; i < 9; i++){
             for(int y = 0; y < 9; y++){
                 if(!(blocks[i][y].getLabel().getText().equals("")))
-                    SudokuBoxes[i][y] = Integer.valueOf(blocks[i][y].getLabel().getText());
+                    tempBoxes[i][y] = Integer.valueOf(blocks[i][y].getLabel().getText());
                 else
-                    SudokuBoxes[i][y] = 0;
+                    tempBoxes[i][y] = 0;
             }
         }    
         
         int x = rand.nextInt(81);
         do{       
-        if(!map.get(x).isEmpty()){
-            saves.add(0); saves.add(map.get(x).clone()); saves.add(x); saves.add(SudokuBoxes);
+        if(!map.get(x).isEmpty()){            
+            saves.add(0); saves.add(map.get(x).clone()); saves.add(x); saves.add(new int[][]{tempBoxes[0],tempBoxes[1],tempBoxes[2],tempBoxes[3],tempBoxes[4],tempBoxes[5],tempBoxes[6],tempBoxes[7],tempBoxes[8]});
             changeColor();
             blocks[x/9][x%9].getLabel().setForeground(new Color(0, 255, 0));
             blocks[x/9][x%9].getLabel().setText(Integer.toString((int)((ArrayList)(map.get(x))).get(0)));           
             // Explanation
             GameWindow.singleton.explanation.clear();
             GameWindow.singleton.explanation.addElement("The computer just had"); GameWindow.singleton.explanation.addElement("to make a guess for the"); 
-            GameWindow.singleton.explanation.addElement(" puzzle. This means that it"); GameWindow.singleton.explanation.addElement("couldn't logically solve for"); 
+            GameWindow.singleton.explanation.addElement("puzzle. This means that it"); GameWindow.singleton.explanation.addElement("couldn't logically solve for"); 
             GameWindow.singleton.explanation.addElement("any value. From this point"); GameWindow.singleton.explanation.addElement("on, it's possible the values");  
             GameWindow.singleton.explanation.addElement("may be incorrect or not"); GameWindow.singleton.explanation.addElement("aligned with the original"); 
             GameWindow.singleton.explanation.addElement("answer key.");
             removeFromLists(x/9, x%9, Integer.valueOf(blocks[x/9][x%9].getLabel().getText()));
+            checkGuess(x);
             break;
         } else{
             x++;
@@ -337,6 +340,90 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
                 x = 0;
         }
         } while(true);       
+    }
+    
+    public boolean checkGuess(int pos){
+        int boxRow = (pos / 9) / 3, boxColumn = (pos % 9) / 3;
+        ArrayList numbers = new ArrayList();
+        ArrayList possNumbers = new ArrayList();
+        
+        for(int i = 0; i < 3; i++){
+            for(int a = i*3; a < i*3+3; a++){
+                for(int b = boxColumn*3; b < boxColumn*3+3; b++){
+                    if(!(blocks[a][b].getLabel().getText().equals("")))
+                        numbers.add(Integer.valueOf(blocks[a][b].getLabel().getText()));
+                    else
+                        possNumbers.add(map.get((a*9) + b));
+                }
+            }
+            for(int y = 1; y <= 9; y++){
+                boolean temp = false;        
+                for(int e = 0; e < numbers.size(); e++){
+                    if( y == (int)numbers.get(e)){
+                        temp  = true;
+                        break;
+                    }
+                }
+                if(temp)
+                    continue;
+                for(int e = 0; e < possNumbers.size(); e++){
+                    if(temp)
+                        break;
+                    for(int p = 0; p < ((ArrayList)possNumbers.get(e)).size(); p++){
+                        if(y == (int)((ArrayList)possNumbers.get(e)).get(p)){
+                            temp = true;
+                            break;
+                        }
+                        if((int)((ArrayList)possNumbers.get(e)).get(p) > y)
+                            break;
+                    }
+                }
+                if(!temp){
+                    redo();
+                    return false;
+                }
+            }
+            numbers.clear(); possNumbers.clear();
+ 
+            for(int a = boxRow*3; a < boxRow*3+3; a++){
+                for(int b = i*3; b < i*3+3; b++){
+                    if(!(blocks[a][b].getLabel().getText().equals("")))
+                        numbers.add(Integer.valueOf(blocks[a][b].getLabel().getText()));
+                    else
+                        possNumbers.add(map.get((a*9) + b));
+                }
+            }
+            for(int y = 1; y <= 9; y++){
+                boolean temp = false;        
+                for(int e = 0; e < numbers.size(); e++){
+                    if( y == (int)numbers.get(e)){
+                        temp  = true;
+                        break;
+                    }
+                }
+                if(temp)
+                    continue;
+                for(int e = 0; e < possNumbers.size(); e++){
+                    if(temp)
+                        break;
+                    for(int p = 0; p < ((ArrayList)possNumbers.get(e)).size(); p++){
+                        if(y == (int)((ArrayList)possNumbers.get(e)).get(p)){
+                            temp = true;
+                            break;
+                        }
+                        if((int)((ArrayList)possNumbers.get(e)).get(p) > y)
+                            break;
+                    }
+                }
+                if(!temp){
+                    redo();
+                    return false;
+                }
+            }
+            numbers.clear(); possNumbers.clear();
+            
+        }
+        return true;
     }
     
     public void redo(){
@@ -353,7 +440,7 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
             warnWin.setVisible(true);
         }
         if(temp < ((ArrayList)(saves.get(saves.size()-3))).size()){
-            saves.remove(saves.size()-4); saves.add(saves.size()-3, temp);
+            saves.set((saves.size()-4), temp);
         } else{
             for(int i = 0; i < 4; i++){
                 saves.remove(saves.size()-1);                                
@@ -361,43 +448,45 @@ public class ComputingSudoku { // Will create Sudoku puzzle randomly
             redo();
             return;
         }
-        int a = (int)saves.get((saves.size()-2) / 9), b = (int)saves.get((saves.size()-2) %9);
+        int a = (int)(saves.get(saves.size()-2)) / 9; int b = (int)(saves.get(saves.size()-2)) %9;
         changeColor();
-        SudokuBoxes = (int[][])saves.get(saves.size()-1);
+        int[][] tempBoxes = (int[][])saves.get(saves.size()-1);
         for(int i = 0; i < 9; i++){
-            for(int y = 0; y < 9; y++){
-                if(a != i && b != y){
-                    if(!(SudokuBoxes[i][y] == 0))
-                        blocks[i][y].getLabel().setText(Integer.toString(SudokuBoxes[i][y]));
-                    else
-                        blocks[i][y].getLabel().setText("");
-                }
+            for(int y = 0; y < 9; y++){               
+                if(!(tempBoxes[i][y] == 0))
+                    blocks[i][y].getLabel().setText(Integer.toString(tempBoxes[i][y]));
+               else
+                    blocks[i][y].getLabel().setText("");
             }
         }                 
         
         for(int i = 0; i < 81; i++){
-            if(a != i/9 && b != i%9){
+//            if(a != i/9 && b != i%9){
                map.put(i, (ArrayList)values.clone());  
-            } else
-                map.put(i, (ArrayList)saves.get(saves.size()-3));
+//            } else
+//                map.put(i, (ArrayList)saves.get(saves.size()-3));
         }        
         
         for (int i = 0; i < 9; i++) {
-            for (int y = 0; y < 9; y++) {               
-                    if(!(SudokuBoxes[i][y] == 0))
-                         removeFromLists(i, y, SudokuBoxes[i][y]);            
+            for (int y = 0; y < 9; y++) { 
+//                if(a != i && b != y){
+                    if(!(tempBoxes[i][y] == 0))
+                         removeFromLists(i, y, tempBoxes[i][y]); 
+ //               }
             }
         }
-        blocks[(int)(saves.get(saves.size()-2)) / 9][(int)(saves.get(saves.size()-2)) % 9].getLabel().setForeground(new Color(0, 255, 0));
-        blocks[(int)(saves.get(saves.size()-2)) / 9][(int)(saves.get(saves.size()-2)) % 9].getLabel().setText(Integer.toString((int)(((ArrayList)(saves.get(saves.size()-3))).get(temp))));
+        blocks[a][b].getLabel().setForeground(new Color(0, 255, 0));
+        blocks[a][b].getLabel().setText(Integer.toString((int)(((ArrayList)(saves.get(saves.size()-3))).get(temp))));
+        removeFromLists(a, b, Integer.valueOf(blocks[a][b].getLabel().getText()));
+        if(!checkGuess((int)saves.get(saves.size()-2))){
+            return;
+        }
         // Explanation
-        GameWindow.singleton.explanation.clear();
+        
         GameWindow.singleton.explanation.addElement("OOPS!"); GameWindow.singleton.explanation.addElement("The computer just ran into"); 
         GameWindow.singleton.explanation.addElement("an error where a value"); GameWindow.singleton.explanation.addElement("couldn't be assigned to a"); 
         GameWindow.singleton.explanation.addElement("box. This is probably"); GameWindow.singleton.explanation.addElement("because the computer"); 
-        GameWindow.singleton.explanation.addElement("guessed wrong and has"); GameWindow.singleton.explanation.addElement("to guess a different"); GameWindow.singleton.explanation.addElement("number for the square.");
-        removeFromLists((int)(saves.get(saves.size()-2))/9, (int)(saves.get(saves.size()-2))%9, Integer.valueOf(blocks[(int)(saves.get(saves.size()-2))/9][(int)(saves.get(saves.size()-2))%9].getLabel().getText()));
-        
+        GameWindow.singleton.explanation.addElement("guessed wrong and has"); GameWindow.singleton.explanation.addElement("to guess a different"); GameWindow.singleton.explanation.addElement("number for the square.");       
     }
     
     // Always possibility to make better design and selecting boxes, assisting the player.

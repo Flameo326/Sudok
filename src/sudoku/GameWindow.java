@@ -2,7 +2,6 @@ package sudoku;
 
 import java.awt.Color;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -284,7 +283,7 @@ public class GameWindow extends javax.swing.JFrame {
             + "out more."}, new String[]{"Try to solve this small", "puzzle yourself. When", "you are ready,", "go back and select", "Play."}};
 
         ComputerButton.setVisible(false);
-       // AnswerButton.setVisible(false);    //Simplify view for newbie
+        AnswerButton.setVisible(false);    //Simplify view for newbie
         StepButton.setVisible(true);
         final int[] i = {0};
         StepButton.addMouseListener(new java.awt.event.MouseAdapter() { // Allow person to click through steps
@@ -302,7 +301,7 @@ public class GameWindow extends javax.swing.JFrame {
         if (i[0] > 4) {
             StepButton.setVisible(false);
         }
-    } 
+    }
     
     public JList getjList(){
         return jList1;
