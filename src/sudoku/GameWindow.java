@@ -112,8 +112,9 @@ public class GameWindow extends javax.swing.JFrame {
                         if(!(blocks[i][y].checkAnswer()))                        
                             match = false;                        
                         correct = compare(i, y, playerChoice[i][y], correct);
-                    } else
+                    } else{
                         correct = false;
+                    }
                 }               
             }
             resetButton();
@@ -141,8 +142,10 @@ public class GameWindow extends javax.swing.JFrame {
                 for(int i = 0; i < 9; i++){
                    for(int y = 0; y < 9; y++){
                        blocks[i][y].getLabel().setForeground(new Color(0, 0, 0));
-                       if(!(blocks[i][y].shown))
+                       if(!(blocks[i][y].shown)){
                            blocks[i][y].getLabel().setText("");
+                            playerChoice[i][y] = 0;
+                       }
                    }                  
                 }
                 explanation.clear();
